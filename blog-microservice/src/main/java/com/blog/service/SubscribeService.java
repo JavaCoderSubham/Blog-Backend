@@ -1,13 +1,13 @@
-package com.blog.dao.subscribe;
+package com.blog.service;
 
 import com.blog.entity.Subscribe;
 
 import java.util.List;
 
-public interface SubscribeDao {
+public interface SubscribeService {
     List<Subscribe> getAllSubscribe();
     Subscribe create(Subscribe subscribe);
-    void unSubscribe(String id);
+    String unSubscribe(String id);
 
     Subscribe findSubscribeByEmail(String email);
 
