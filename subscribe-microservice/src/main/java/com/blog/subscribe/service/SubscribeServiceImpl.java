@@ -57,4 +57,12 @@ public class SubscribeServiceImpl implements SubscribeService {
         subscribeDao.subscribeDeleteById(id);
         log.info("subscribeDeleteById(String) -> | Id : {} | Deleted",id);
     }
+    
+    @Override
+    public Subscribe findSubscribeById(String id) {
+        log.info("findSubscribeById() -> | ");
+        Subscribe subscribe = subscribeDao.findSubscribeById(id);
+        log.info("findSubscribeById() -> | Subscribe : {}", subscribe);
+        return subscribe;
+    }
 }

@@ -73,6 +73,14 @@ public class SubscribeDaoImpl implements SubscribeDao {
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
     }
+
+	@Override
+	public Subscribe findSubscribeById(String id) {
+		log.info("findSubscribeById() -> | ");
+        Subscribe optionalSubscribe = repository.findById(id).orElseThrow(() -> new SubscriberNotFoundException());
+        log.info("findSubscribeById() -> | Subscribe : {}", optionalSubscribe);
+        return optionalSubscribe;
+	}
 }
 
 

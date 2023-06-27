@@ -10,6 +10,8 @@ public interface SubscribeDao {
     void unSubscribe(String id);
 
     Subscribe findSubscribeByEmail(String email);
+    
+    Subscribe findSubscribeById(String id);
 
     void subscribeDeleteById(String id);
 }
