@@ -1,7 +1,12 @@
 package com.blog.exception;
 
 public class BlogDetailsImageNotFoundException extends RuntimeException {
-    public BlogDetailsImageNotFoundException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public BlogDetailsImageNotFoundException() {
         super("Blog Details Image Not Found Exception");
     }
 }

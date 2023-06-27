@@ -1,8 +1,8 @@
 package com.blog.dao.review;
 
-import com.blog.entity.Review;
-
 import java.util.List;
+
+import com.blog.entity.Review;
 
 public interface ReviewDao {
 
