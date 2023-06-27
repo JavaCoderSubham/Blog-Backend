@@ -1,13 +1,14 @@
 package com.blog.dao.review;
 
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.blog.entity.Review;
 import com.blog.exception.ReviewNotFoundException;
 import com.blog.repository.ReviewRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component

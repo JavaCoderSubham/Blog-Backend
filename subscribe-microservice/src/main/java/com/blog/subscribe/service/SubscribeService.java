@@ -1,8 +1,8 @@
-package com.blog.service;
-
-import com.blog.entity.Subscribe;
+package com.blog.subscribe.service;
 
 import java.util.List;
+
+import com.blog.subscribe.entity.Subscribe;
 
 public interface SubscribeService {
     List<Subscribe> getAllSubscribe();

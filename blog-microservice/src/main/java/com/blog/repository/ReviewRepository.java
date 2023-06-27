@@ -1,9 +1,10 @@
 package com.blog.repository;
 
-import com.blog.entity.Review;
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+import com.blog.entity.Review;
 
 public interface ReviewRepository extends MongoRepository<Review,String> {
     List<Review> findByPostId(String postId);

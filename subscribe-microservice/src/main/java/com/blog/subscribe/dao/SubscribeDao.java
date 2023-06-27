@@ -1,8 +1,8 @@
-package com.blog.dao.subscribe;
-
-import com.blog.entity.Subscribe;
+package com.blog.subscribe.dao;
 
 import java.util.List;
+
+import com.blog.subscribe.entity.Subscribe;
 
 public interface SubscribeDao {
     List<Subscribe> getAllSubscribe();

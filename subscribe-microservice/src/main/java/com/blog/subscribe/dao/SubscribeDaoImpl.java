@@ -1,16 +1,16 @@
-package com.blog.dao.subscribe;
-
-import com.blog.entity.BlogDetails;
-import com.blog.entity.Subscribe;
-import com.blog.exception.SubscriberNotFoundException;
-import com.blog.repository.SubScribeRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+package com.blog.subscribe.dao;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
+import com.blog.subscribe.entity.Subscribe;
+import com.blog.subscribe.exceptions.SubscriberNotFoundException;
+import com.blog.subscribe.repository.SubScribeRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component

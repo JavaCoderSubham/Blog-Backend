@@ -1,21 +1,14 @@
 package com.blog.service;
 
-import com.blog.dao.blogDetails.BlogDetailsDao;
-import com.blog.entity.BlogDetails;
-import com.blog.exception.BlogDetailsImageNotFoundException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
+import com.blog.dao.blogDetails.BlogDetailsDao;
+import com.blog.entity.BlogDetails;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service

@@ -1,9 +1,10 @@
 package com.blog.repository;
 
-import com.blog.entity.UserInfo;
+import java.util.Optional;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.Optional;
+import com.blog.entity.UserInfo;
 
 public interface UserInfoRepository extends MongoRepository<UserInfo,String> {
 

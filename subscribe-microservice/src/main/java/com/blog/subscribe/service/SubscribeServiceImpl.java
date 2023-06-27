@@ -1,13 +1,15 @@
-package com.blog.service;
-
-import com.blog.dao.subscribe.SubscribeDao;
-import com.blog.entity.Subscribe;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.blog.subscribe.service;
 
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.blog.subscribe.dao.SubscribeDao;
+import com.blog.subscribe.entity.Subscribe;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
