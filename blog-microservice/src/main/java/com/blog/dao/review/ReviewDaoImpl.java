@@ -8,7 +8,12 @@ import com.blog.entity.Review;
 import com.blog.exception.ReviewNotFoundException;
 import com.blog.repository.ReviewRepository;
 
+<<<<<<< HEAD
 import lombok.extern.slf4j.Slf4j;
+=======
+import java.util.List;
+import java.util.UUID;
+>>>>>>> a8e5cab3f40d0c6b381a7183d6c899ddd3f37f3f
 
 @Slf4j
 @Component
@@ -36,20 +41,26 @@ public class ReviewDaoImpl implements ReviewDao {
         return listReview;
     }
     @Override
-    public Review create(String postId, Review review) {
-//    TODO
-        return null;
+    public Review create(Review review) {
+        log.info("create(Review) -> | Review : {}",review);
+
+
+
+        review.setId(UUID.randomUUID().toString());
+        log.info("create(Review) -> | Set UUID : {}",review);
+        Review save = repository.save(review);
+        log.info("create(Review) -> | After Save Review : {}",save);
+        return save;
     }
     @Override
     public void delete(String id) {
-//    TODO
+        log.info("delete(String) -> | Id : {}",id);
+        getReview(id);
+        log.info("delete(String) -> | Id : {} | Present",id);
+        repository.deleteById(id);
+        log.info("delete(String) -> | Deleted Id : {}",id);
+    }
 
-    }
-    @Override
-    public Review findByMobile(String mobileNumber) {
-//    TODO
-        return null;
-    }
 
 }
 

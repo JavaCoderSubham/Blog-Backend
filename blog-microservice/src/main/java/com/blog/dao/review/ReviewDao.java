@@ -8,8 +8,7 @@ public interface ReviewDao {
 
     Review getReview(String id);
     List<Review> getPostIdReview(String postId);
-    Review create(String postId, Review review);
+    Review create(Review review);
     void delete(String id);
-    Review findByMobile(String mobileNumber);
 
 }
