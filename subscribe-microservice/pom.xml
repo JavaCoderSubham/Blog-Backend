@@ -5,26 +5,30 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.13</version>
+		<version>3.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.blog.gateway</groupId>
-	<artifactId>blog-gateway</artifactId>
+	<groupId>com.blog.subscribe</groupId>
+	<artifactId>subscribe-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>blog-gateway</name>
-	<description>This Microservice for Gateway</description>
+	<name>subscribe-microservice</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 
 		<dependency>
