@@ -8,9 +8,17 @@ import org.springframework.stereotype.Component;
 import com.blog.entity.BlogDetails;
 import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
+<<<<<<< HEAD
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.UUID;
+=======
 import com.blog.repository.ReviewRepository;
 
 import lombok.extern.slf4j.Slf4j;
+>>>>>>> cbb34b0346e17988ad80838d2c3a02192aad43d8
 
 @Slf4j
 @Component
@@ -18,11 +26,8 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
 
     private final BlogDetailsRepository repository;
 
-    private final ReviewRepository reviewRepository;
-
-    public BlogDetailsDaoImpl(BlogDetailsRepository repository, ReviewRepository reviewRepository) {
+    public BlogDetailsDaoImpl(BlogDetailsRepository repository) {
         this.repository = repository;
-        this.reviewRepository = reviewRepository;
     }
 
     @Override
@@ -31,9 +36,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         List<BlogDetails> all = repository.findAll();
         log.info("getAllBlog() -> | List BlogDetails : {}",all);
 
-        for(BlogDetails temp : all) {
-            temp.setReview(reviewRepository.findByPostId(temp.getId()));
-        }
+//        TODO Review Add
 
         return all;
     }
@@ -80,6 +83,9 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         log.info("delete(String) -> | Present Id : {}",id);
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
+
+//        TODO Delete all review which is attack with this blog
+
     }
 
     @Override
@@ -87,6 +93,9 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         log.info("deleteAll() -> | ");
         repository.deleteAll();
         log.info("deleteAll() -> | All Deleted");
+
+//        TODO review deleteAll
+
     }
 
 //    Find Methods

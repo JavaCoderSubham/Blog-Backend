@@ -18,6 +18,7 @@ public class BlogDetailsController {
         this.service = service;
     }
 
+//    Get
     @GetMapping("/getAll")
     public List<BlogDetails> getAll() {
         log.info("============ Get All Method Start ============");
@@ -28,6 +29,17 @@ public class BlogDetailsController {
         return all;
     }
 
+    @GetMapping("/get/{id}")
+    public BlogDetails getBlog(@PathVariable String id) {
+        log.info("============ Get By ID Method Start ============");
+        log.info("getBlog(String) -> | Id : {}",id);
+        BlogDetails blog = service.getBlog(id);
+        log.info("getBlog(String) -> | BlogDetails : {}",blog);
+        log.info("============ Get By ID Method End ============");
+        return blog;
+    }
+
+//    Create
     @PostMapping("/create")
     public BlogDetails create(@RequestBody BlogDetails blogDetails) {
         log.info("create(BlogDetails) -> | BlogDetails : {}",blogDetails);
@@ -36,6 +48,10 @@ public class BlogDetailsController {
         return save;
     }
 
+//    Update
+    
+
+//    Delete
     @DeleteMapping("/delete/{id}")
     public void blogDeleteById(@RequestParam String id) {
         log.info("blogDeleteById(String) -> | Id : {}",id);
