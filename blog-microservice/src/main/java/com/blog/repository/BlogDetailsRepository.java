@@ -1,9 +1,10 @@
 package com.blog.repository;
 
-import com.blog.entity.BlogDetails;
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+import com.blog.entity.BlogDetails;
 
 public interface BlogDetailsRepository extends MongoRepository<BlogDetails, String> {
 

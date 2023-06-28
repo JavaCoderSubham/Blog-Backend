@@ -1,12 +1,22 @@
 package com.blog.service;
 
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Service;
+
 import com.blog.dao.blogDetails.BlogDetailsDao;
 import com.blog.entity.BlogDetails;
+<<<<<<< HEAD
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+=======
+
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> cbb34b0346e17988ad80838d2c3a02192aad43d8
 
 @Slf4j
 @Service

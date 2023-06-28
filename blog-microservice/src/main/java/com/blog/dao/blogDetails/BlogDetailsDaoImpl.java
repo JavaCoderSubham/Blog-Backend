@@ -1,13 +1,24 @@
 package com.blog.dao.blogDetails;
 
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
 import com.blog.entity.BlogDetails;
 import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
+<<<<<<< HEAD
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
+=======
+import com.blog.repository.ReviewRepository;
+
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> cbb34b0346e17988ad80838d2c3a02192aad43d8
 
 @Slf4j
 @Component

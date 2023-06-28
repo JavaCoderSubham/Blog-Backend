@@ -1,9 +1,8 @@
 package com.blog.service;
 
-import com.blog.entity.BlogDetails;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
+
+import com.blog.entity.BlogDetails;
 
 public interface BlogDetailsService {
 
