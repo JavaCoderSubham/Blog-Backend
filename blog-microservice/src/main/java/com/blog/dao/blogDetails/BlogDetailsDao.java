@@ -7,15 +7,22 @@ import java.util.List;
 
 public interface BlogDetailsDao {
 
+//    Get
     List<BlogDetails> getAllBlog();
     BlogDetails getBlog(String id);
+
+//    Create
     BlogDetails create(BlogDetails blogDetails);
+
+//    Update
     BlogDetails update(String id, BlogDetails blogDetails);
+
+//    Delete
     void delete(String id);
     void deleteAll();
 
 
-//    Finding Method
+//    Finding
 
     List<BlogDetails> findByAuthor(String author);
     List<BlogDetails> findByTitleStartingWith(String title);
