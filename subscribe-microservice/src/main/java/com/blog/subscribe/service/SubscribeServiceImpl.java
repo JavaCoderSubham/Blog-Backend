@@ -52,11 +52,19 @@ public class SubscribeServiceImpl implements SubscribeService {
     }
 
     @Override
-    public void subscribeDeleteById(String id) {
+    public void deleteSubscribeById(String id) {
         log.info("subscribeDeleteById(String) -> | Id : {}",id);
-        subscribeDao.subscribeDeleteById(id);
-        log.info("subscribeDeleteById(String) -> | Id : {} | Deleted",id);
+        subscribeDao.deleteSubscribeById(id);
+        log.info("deleteSubscribeById(String) -> | Id : {} | Deleted",id);
     }
+    
+    @Override
+    public void deleteSubscribeByEmail(String email) {
+        log.info("deleteSubscribeByEmail(String) -> | Email : {}",email);
+        subscribeDao.deleteSubscribeByEmail(email);
+        log.info("deleteSubscribeByEmail(String) -> | Email : {} | Deleted",email);
+    }
+      
     
     @Override
     public Subscribe findSubscribeById(String id) {

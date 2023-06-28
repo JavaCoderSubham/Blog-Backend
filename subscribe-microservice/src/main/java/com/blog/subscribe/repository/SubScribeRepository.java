@@ -11,4 +11,5 @@ public interface SubScribeRepository extends MongoRepository<Subscribe,String> {
     List<Subscribe> findByActiveSubscribeTrue();
     List<Subscribe> findByActiveSubscribeFalse();
     Optional<Subscribe> findSubscribeByEmail(String email);
+    void deleteSubscribeByEmail(String email);
 }

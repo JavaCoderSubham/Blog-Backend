@@ -68,7 +68,7 @@ public class SubscribeDaoImpl implements SubscribeDao {
     }
 
     @Override
-    public void subscribeDeleteById(String id) {
+    public void deleteSubscribeById(String id) {
         log.info("delete(String) -> | Id : {}",id);
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
@@ -80,6 +80,13 @@ public class SubscribeDaoImpl implements SubscribeDao {
         Subscribe optionalSubscribe = repository.findById(id).orElseThrow(() -> new SubscriberNotFoundException());
         log.info("findSubscribeById() -> | Subscribe : {}", optionalSubscribe);
         return optionalSubscribe;
+	}
+
+	@Override
+	public void deleteSubscribeByEmail(String email) {	
+		log.info("delete(String) -> | Email : {}",email);
+        repository.deleteSubscribeByEmail(email);
+        log.info("delete(String) -> | Deleted... Email : {}",email);
 	}
 }
 

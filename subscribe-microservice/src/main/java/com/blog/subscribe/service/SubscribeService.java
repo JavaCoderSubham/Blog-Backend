@@ -12,6 +12,8 @@ public interface SubscribeService {
     Subscribe findSubscribeByEmail(String email);
     
     Subscribe findSubscribeById(String id);
+    
+    void deleteSubscribeById(String id);
 
-    void subscribeDeleteById(String id);
+    void deleteSubscribeByEmail(String email);
 }

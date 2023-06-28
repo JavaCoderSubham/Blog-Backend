@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.subscribe.entity.Subscribe;
+import com.blog.subscribe.service.EmailSenderService;
 import com.blog.subscribe.service.SubscribeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,12 +27,17 @@ public class SubscribeController {
 
     @Autowired
     private SubscribeService subscribeService;
+    
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     @PostMapping("/create")
     public ResponseEntity<Subscribe> createSubscribe(@RequestBody Subscribe subscribe) {
         log.info("create(Subscribe) -> | Subscribe : {}",subscribe);
         Subscribe save = subscribeService.create(subscribe);
         log.info("create(Subscribe) -> | After Service : {}",save);
+        emailSenderService.sendSimpleEmail(subscribe.getEmail(), "Congratulations " + subscribe.getName() + ", you have subscribed successfully to our updates. Thankyou for subscribing to our services.", "Blog Subscription");
+        log.info("sendSimpleEmail() -> | Registration email sent successfully.");
         return new ResponseEntity<Subscribe>(save, HttpStatus.CREATED);
     }
 
@@ -70,10 +76,18 @@ public class SubscribeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String subscribeDeleteById(@PathVariable String id) {
-        log.info("subscribeDeleteById(String) -> | Id : {}",id);
-        subscribeService.subscribeDeleteById(id);
-        log.info("subscribeDeleteById(String) -> | Id : {} | Completed",id);
+    public String deleteSubscribeById(@PathVariable String id) {
+        log.info("deleteSubscribeById(String) -> | Id : {}",id);
+        subscribeService.deleteSubscribeById(id);
+        log.info("deleteSubscribeById(String) -> | Id : {} | Completed",id);
         return "User deleted successfully with id " + id;
+    }
+    
+    @DeleteMapping("/delete/{email}")
+    public String deleteSubscribeByEmail(@PathVariable String email) {
+        log.info("deleteSubscribeByEmail(String) -> | Email : {}",email);
+        subscribeService.deleteSubscribeByEmail(email);
+        log.info("deleteSubscribeByEmail(String) -> | Email : {} | Completed",email);
+        return "User deleted successfully with email " + email;
     }
 }
