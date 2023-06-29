@@ -49,7 +49,7 @@ public class BlogDetailsController {
     }
 
 //    Update
-    
+
 
 //    Delete
     @DeleteMapping("/delete/{id}")
