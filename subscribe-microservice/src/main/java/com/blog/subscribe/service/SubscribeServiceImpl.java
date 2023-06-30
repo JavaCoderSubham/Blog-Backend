@@ -73,4 +73,12 @@ public class SubscribeServiceImpl implements SubscribeService {
         log.info("findSubscribeById() -> | Subscribe : {}", subscribe);
         return subscribe;
     }
+
+	@Override
+	public Subscribe findSubscribeByMobileNumber(String mobileNumber) {
+		log.info("findSubscribeByMobileNumber) -> | ");
+        Subscribe subscribe = subscribeDao.findSubscribeByMobileNumber(mobileNumber);
+        log.info("findSubscribeByMobileNumber() -> | Subscribe : {}", subscribe);
+        return subscribe;
+	}
 }

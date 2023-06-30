@@ -11,6 +11,8 @@ public interface SubscribeDao {
 
     Subscribe findSubscribeByEmail(String email);
     
+    Subscribe findSubscribeByMobileNumber(String mobileNumber);
+    
     Subscribe findSubscribeById(String id);
 
     void deleteSubscribeById(String id);
