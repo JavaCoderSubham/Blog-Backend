@@ -1,6 +1,7 @@
 package com.blog.dao.review;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
@@ -8,10 +9,7 @@ import com.blog.entity.Review;
 import com.blog.exception.ReviewNotFoundException;
 import com.blog.repository.ReviewRepository;
 
-
 import lombok.extern.slf4j.Slf4j;
-import java.util.List;
-import java.util.UUID;
 
 
 @Slf4j

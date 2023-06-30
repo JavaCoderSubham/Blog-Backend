@@ -8,12 +8,6 @@ import org.springframework.stereotype.Component;
 import com.blog.entity.BlogDetails;
 import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.UUID;
-import com.blog.repository.ReviewRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
