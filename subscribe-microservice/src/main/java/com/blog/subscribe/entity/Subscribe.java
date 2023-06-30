@@ -21,9 +21,9 @@ public class Subscribe {
     @Id
     private String id;
     private String name;
-    @Indexed(unique = true, background = true)
+    @Indexed(unique = true)
     private String email;
-    @Indexed(unique = true, background = true)
+    @Indexed(unique = true)
     private String mobileNumber;
     private boolean activeSubscribe;
 }

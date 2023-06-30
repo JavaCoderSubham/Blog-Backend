@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 import com.blog.subscribe.entity.Subscribe;
+import com.blog.subscribe.exceptions.EmailOrMobileAlreadyExistException;
 import com.blog.subscribe.exceptions.SubscriberNotFoundException;
 import com.blog.subscribe.repository.SubScribeRepository;
 
@@ -37,6 +38,10 @@ public class SubscribeDaoImpl implements SubscribeDao {
         subscribe.setActiveSubscribe(true);
         subscribe.setId(UUID.randomUUID().toString());
         log.info("create(Subscribe) -> | After Set Id Subscribe : {}",subscribe);
+        if (repository.findSubscribeByEmail(subscribe.getEmail()).isPresent() ||
+                repository.findSubscribeByMobileNumber(subscribe.getMobileNumber()).isPresent()) {
+            throw new EmailOrMobileAlreadyExistException();
+        }
         Subscribe save = repository.save(subscribe);
         log.info("create(Subscribe) -> | After Save Subscribe : {}",subscribe);
         return save;
@@ -69,9 +74,14 @@ public class SubscribeDaoImpl implements SubscribeDao {
 
     @Override
     public void deleteSubscribeById(String id) {
-        log.info("delete(String) -> | Id : {}",id);
-        repository.deleteById(id);
-        log.info("delete(String) -> | Deleted... ID : {}",id);
+    	if(repository.findById(id).isPresent()) {
+    		log.info("delete(String) -> | Id : {}",id);
+            repository.deleteById(id);
+            log.info("delete(String) -> | Deleted... ID : {}",id);
+    	}
+    	else {
+    		throw new SubscriberNotFoundException();
+    	}
     }
 
 	@Override
@@ -88,6 +98,15 @@ public class SubscribeDaoImpl implements SubscribeDao {
         repository.deleteSubscribeByEmail(email);
         log.info("delete(String) -> | Deleted... Email : {}",email);
 	}
+
+	@Override
+	public Subscribe findSubscribeByMobileNumber(String mobileNumber) {
+		log.info("findSubscribeByMobileNumber() -> | ");
+        Subscribe optionalSubscribe = repository.findSubscribeByMobileNumber(mobileNumber).orElseThrow(() -> new SubscriberNotFoundException());
+        log.info("findSubscribeByMobileNumber() -> | Subscribe : {}", optionalSubscribe);
+        return optionalSubscribe;
+	}
+
 }
 
 

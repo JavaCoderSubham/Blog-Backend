@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.blog.dao.blogDetails.BlogDetailsDao;
 import com.blog.entity.BlogDetails;
+
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @Service
@@ -106,10 +108,10 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
     }
 
     @Override
-    public List<BlogDetails> findByBlogTextContaining(String blogText) {
+    public List<BlogDetails> findByBlogTextStartingWith(String blogText) {
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
-        List<BlogDetails> blogTextObjects = dao.findByBlogTextContaining(blogText);
-        log.info("findByBlogTextStartingWith(String) -> |  : {}",blogTextObjects);
+        List<BlogDetails> blogTextObjects = dao.findByBlogTextStartingWith(blogText);
+        log.info("findByBlogTextStartingWith(String) -> |  : {}",blogText);
         return blogTextObjects;
     }
 

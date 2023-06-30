@@ -74,8 +74,16 @@ public class SubscribeController {
         log.info("findSubscribeById() -> | Subscribe : {}", subscribe);
         return new ResponseEntity<>(subscribe, HttpStatus.OK);
     }
+    
+    @GetMapping("/findbymobile/{mobileNumber}")
+    public ResponseEntity<Subscribe> findSubscribeByMobileNumber(@PathVariable String mobileNumber) {
+        log.info("findSubscribeByMobileNumber() -> | ");
+        Subscribe subscribe = subscribeService.findSubscribeByMobileNumber(mobileNumber);
+        log.info("findSubscribeByMobileNumber() -> | Subscribe : {}", subscribe);
+        return new ResponseEntity<>(subscribe, HttpStatus.OK);
+    }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deletebyid/{id}")
     public String deleteSubscribeById(@PathVariable String id) {
         log.info("deleteSubscribeById(String) -> | Id : {}",id);
         subscribeService.deleteSubscribeById(id);
@@ -83,7 +91,7 @@ public class SubscribeController {
         return "User deleted successfully with id " + id;
     }
     
-    @DeleteMapping("/delete/{email}")
+    @DeleteMapping("/deletebyemail/{email}")
     public String deleteSubscribeByEmail(@PathVariable String email) {
         log.info("deleteSubscribeByEmail(String) -> | Email : {}",email);
         subscribeService.deleteSubscribeByEmail(email);

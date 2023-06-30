@@ -16,4 +16,6 @@ public interface SubscribeService {
     void deleteSubscribeById(String id);
 
     void deleteSubscribeByEmail(String email);
+    
+    Subscribe findSubscribeByMobileNumber(String mobileNumber);
 }

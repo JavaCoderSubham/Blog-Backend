@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import com.blog.entity.BlogDetails;
 import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
+
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @Component
@@ -46,7 +48,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         blogDetails.setId(UUID.randomUUID().toString());
         log.info("create(BlogDetails) -> | After Set Id BlogDetails : {}",blogDetails);
         BlogDetails save = repository.save(blogDetails);
-        log.info("create(BlogDetails) -> | After Save BlogDetails : {}",save);
+        log.info("create(BlogDetails) -> | After Save BlogDetails : {}",blogDetails);
         return save;
     }
 
@@ -74,7 +76,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
 
-//        TODO Delete all review which is attach with this blog
+//        TODO Delete all review which is attack with this blog
 
     }
 
@@ -123,9 +125,9 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
     }
 
     @Override
-    public List<BlogDetails> findByBlogTextContaining(String blogText) {
+    public List<BlogDetails> findByBlogTextStartingWith(String blogText) {
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
-        List<BlogDetails> getBlogText = repository.findByBlogTextContaining(blogText);
+        List<BlogDetails> getBlogText = repository.findByBlogTextStartingWith(blogText);
         log.info("findByBlogTextStartingWith(String) -> | List BlogDetails : {}",getBlogText);
         return getBlogText;
     }
