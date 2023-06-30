@@ -106,10 +106,10 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
     }
 
     @Override
-    public List<BlogDetails> findByBlogTextStartingWith(String blogText) {
+    public List<BlogDetails> findByBlogTextContaining(String blogText) {
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
-        List<BlogDetails> blogTextObjects = dao.findByBlogTextStartingWith(blogText);
-        log.info("findByBlogTextStartingWith(String) -> |  : {}",blogText);
+        List<BlogDetails> blogTextObjects = dao.findByBlogTextContaining(blogText);
+        log.info("findByBlogTextStartingWith(String) -> |  : {}",blogTextObjects);
         return blogTextObjects;
     }
 

@@ -45,7 +45,7 @@ public class BlogDetailsController {
         log.info("============ Create Method Start ============");
         log.info("create(BlogDetails) -> | BlogDetails : {}",blogDetails);
         BlogDetails save = service.create(blogDetails);
-        log.info("create(BlogDetails) -> | After Service : {}",save);
+        log.info("create(BlogDetails) -> | After save BlogDetails : {}",save);
         log.info("============ Create Method End ============");
         return save;
     }
@@ -107,7 +107,7 @@ public class BlogDetailsController {
         log.info("============ Find By Topic StartWith Method Start ============");
         log.info("findByTopicStartingWith(String) -> | Topic : {}",topic);
         List<BlogDetails> list = service.findByTopicStartingWith(topic);
-        log.info("findByTopicStartingWith(String) -> | List Topic BlogDetails : {}",topic);
+        log.info("findByTopicStartingWith(String) -> | List Topic BlogDetails : {}",list);
         log.info("============ Find By Topic StartWith Method End ============");
         return list;
     }
@@ -117,16 +117,16 @@ public class BlogDetailsController {
         log.info("============ Find By Email Method Start ============");
         log.info("findByEmail(String) -> | Email : {}",email);
         List<BlogDetails> list = service.findByEmail(email);
-        log.info("findByEmail(String) -> | List Email BlogDetails : {}",email);
+        log.info("findByEmail(String) -> | List Email BlogDetails : {}",list);
         log.info("============ Find By Email Method End ============");
         return list;
     }
 
     @GetMapping("/findBlogText/{blogText}")
-    public List<BlogDetails> findByBlogTextStartingWith(@PathVariable String blogText) {
+    public List<BlogDetails> findByBlogTextContaining(@PathVariable String blogText) {
         log.info("============ Find By BlogText StartingWith Method Start ============");
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
-        List<BlogDetails> list = service.findByBlogTextStartingWith(blogText);
+        List<BlogDetails> list = service.findByBlogTextContaining(blogText);
         log.info("findByBlogTextStartingWith(String) -> | List BlogText BlogDetails : {}",list);
         log.info("============ Find By BlogText StartingWith Method End ============");
         return list;

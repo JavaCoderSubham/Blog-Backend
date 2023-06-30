@@ -12,7 +12,7 @@ public interface BlogDetailsRepository extends MongoRepository<BlogDetails, Stri
     List<BlogDetails> findByTitleStartingWith(String title);
     List<BlogDetails> findByTopicStartingWith(String topic);
     List<BlogDetails> findByEmail(String email);
-    List<BlogDetails> findByBlogTextStartingWith(String blogText);
+    List<BlogDetails> findByBlogTextContaining(String blogText);
 
 
 }

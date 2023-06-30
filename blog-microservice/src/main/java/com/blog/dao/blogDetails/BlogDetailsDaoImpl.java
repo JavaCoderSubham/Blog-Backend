@@ -46,7 +46,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         blogDetails.setId(UUID.randomUUID().toString());
         log.info("create(BlogDetails) -> | After Set Id BlogDetails : {}",blogDetails);
         BlogDetails save = repository.save(blogDetails);
-        log.info("create(BlogDetails) -> | After Save BlogDetails : {}",blogDetails);
+        log.info("create(BlogDetails) -> | After Save BlogDetails : {}",save);
         return save;
     }
 
@@ -74,7 +74,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
 
-//        TODO Delete all review which is attack with this blog
+//        TODO Delete all review which is attach with this blog
 
     }
 
@@ -123,9 +123,9 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
     }
 
     @Override
-    public List<BlogDetails> findByBlogTextStartingWith(String blogText) {
+    public List<BlogDetails> findByBlogTextContaining(String blogText) {
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
-        List<BlogDetails> getBlogText = repository.findByBlogTextStartingWith(blogText);
+        List<BlogDetails> getBlogText = repository.findByBlogTextContaining(blogText);
         log.info("findByBlogTextStartingWith(String) -> | List BlogDetails : {}",getBlogText);
         return getBlogText;
     }
