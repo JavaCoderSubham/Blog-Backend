@@ -8,12 +8,11 @@ import com.blog.entity.Review;
 import com.blog.exception.ReviewNotFoundException;
 import com.blog.repository.ReviewRepository;
 
-<<<<<<< HEAD
+
 import lombok.extern.slf4j.Slf4j;
-=======
 import java.util.List;
 import java.util.UUID;
->>>>>>> a8e5cab3f40d0c6b381a7183d6c899ddd3f37f3f
+
 
 @Slf4j
 @Component
