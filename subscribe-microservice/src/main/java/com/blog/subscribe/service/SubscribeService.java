@@ -7,7 +7,11 @@ import com.blog.subscribe.entity.Subscribe;
 public interface SubscribeService {
     List<Subscribe> getAllSubscribe();
     Subscribe create(Subscribe subscribe);
-    String unSubscribe(String id);
+    String unSubscribeById(String id);
+    
+    String unSubscribeByEmail(String email);
+    
+    String unSubscribeByMobileNumber(String mobileNumber);
 
     Subscribe findSubscribeByEmail(String email);
     
