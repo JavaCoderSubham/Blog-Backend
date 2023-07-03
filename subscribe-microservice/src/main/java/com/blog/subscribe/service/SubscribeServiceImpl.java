@@ -17,6 +17,8 @@ public class SubscribeServiceImpl implements SubscribeService {
 
     @Autowired
     private SubscribeDao subscribeDao;
+    
+    //Get All Subscribers
     @Override
     public List<Subscribe> getAllSubscribe() {
         log.info("getAll() -> | ");
@@ -25,6 +27,7 @@ public class SubscribeServiceImpl implements SubscribeService {
         return all;
     }
 
+    //Create Subscriber
     @Override
     public Subscribe create(Subscribe subscribe) {
         log.info("create(Subscribe) -> | Subscribe : {}",subscribe);
@@ -35,14 +38,34 @@ public class SubscribeServiceImpl implements SubscribeService {
         return getSave;
     }
 
+    //Unsubscribe By Id
     @Override
-    public String unSubscribe(String id) {
+    public String unSubscribeById(String id) {
         log.info("unsubscribe() -> | Unsubscribing Subscribe : {}");
-        subscribeDao.unSubscribe(id);
+        subscribeDao.unSubscribeById(id);
         log.info("unsubscribe() -> | Subscribe Unsubscribed : {}");
         return "Successfully unsubscribed";
     }
+    
+    //Unsubscribe By Email
+    @Override
+    public String unSubscribeByEmail(String email) {
+        log.info("unsubscribeByEmail() -> | Unsubscribing Subscribe : {} ", email);
+        subscribeDao.unSubscribeByEmail(email);
+        log.info("unsubscribeByEmail() -> | Subscribe Unsubscribed : {} ", email);
+        return "Successfully unsubscribed";
+    }
+    
+    //Unsubscribe By Mobile Number
+    @Override
+    public String unSubscribeByMobileNumber(String mobileNumber) {
+        log.info("unsubscribeByMobileNumber() -> | Unsubscribing Subscribe : {} ", mobileNumber);
+        subscribeDao.unSubscribeByMobileNumber(mobileNumber);
+        log.info("unsubscribeByMobileNumber() -> | Subscribe Unsubscribed : {} ", mobileNumber);
+        return "Successfully unsubscribed";
+    }
 
+    //Find subscribe By Email
     @Override
     public Subscribe findSubscribeByEmail(String email) {
         log.info("findSubscribeByEmail() -> | ");
@@ -51,6 +74,7 @@ public class SubscribeServiceImpl implements SubscribeService {
         return subscribe;
     }
 
+    //Delete Subscribe By Id
     @Override
     public void deleteSubscribeById(String id) {
         log.info("subscribeDeleteById(String) -> | Id : {}",id);
@@ -58,6 +82,7 @@ public class SubscribeServiceImpl implements SubscribeService {
         log.info("deleteSubscribeById(String) -> | Id : {} | Deleted",id);
     }
     
+    //Delete Subscribe By Email
     @Override
     public void deleteSubscribeByEmail(String email) {
         log.info("deleteSubscribeByEmail(String) -> | Email : {}",email);
@@ -65,7 +90,7 @@ public class SubscribeServiceImpl implements SubscribeService {
         log.info("deleteSubscribeByEmail(String) -> | Email : {} | Deleted",email);
     }
       
-    
+    //Find Subscribe By Id
     @Override
     public Subscribe findSubscribeById(String id) {
         log.info("findSubscribeById() -> | ");
@@ -74,6 +99,7 @@ public class SubscribeServiceImpl implements SubscribeService {
         return subscribe;
     }
 
+    //Find Subscribe By Mobile Number
 	@Override
 	public Subscribe findSubscribeByMobileNumber(String mobileNumber) {
 		log.info("findSubscribeByMobileNumber) -> | ");
