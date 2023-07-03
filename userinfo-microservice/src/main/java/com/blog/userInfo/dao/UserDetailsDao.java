@@ -1,16 +1,19 @@
-package com.blog.userInfo.service;
+package com.blog.userInfo.dao;
 
 import java.util.List;
+
+import org.springframework.web.client.HttpClientErrorException.NotFound;
 
 import com.blog.userInfo.entity.UserInfo;
 import com.blog.userInfo.exception.RecordNotFound;
 
-public interface UserService {
+
+public interface UserDetailsDao {
 
 	UserInfo create(UserInfo user);
 	List<UserInfo> getAll();
-	UserInfo getById(String id) throws RecordNotFound;
-	String deleteById(String id) throws RecordNotFound;
+	UserInfo getById(String id) throws NotFound, RecordNotFound;
+	String deleteById(String id) throws NotFound, RecordNotFound;
 	UserInfo update(UserInfo userDetails , String id);
 	
 	//***************************************//
@@ -23,7 +26,5 @@ public interface UserService {
 	
 	UserInfo findByEmail(String email) throws RecordNotFound;
 	
-	UserInfo findByPhoneNo(String phoneNo) throws RecordNotFound;	
+	UserInfo findByPhoneNo(String phoneNo) throws  RecordNotFound;	
 }
-
-

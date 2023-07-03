@@ -9,24 +9,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Document
-public class UserDetails {
+public class UserInfo {
 
 	@Id
 	private String id;
 	private String name;
-	@Indexed(unique = true)
+	private String role;
+//	@Indexed(unique = true)
 	private String email;
 	private String password;
-	@Indexed(unique = true)
-	private long phoneNo;
+//	@Indexed(unique = true)
+	private String phoneNo;
 	private String imagePath;
-	private Address address;
+//	private Address address;
 	@Transient
-	List<Review> review;
+	private List<Review> review;
 }
