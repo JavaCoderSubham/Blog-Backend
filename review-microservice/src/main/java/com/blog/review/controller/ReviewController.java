@@ -28,7 +28,7 @@ public class ReviewController {
         log.info("================= Get Reviews UserId End =================");
         return null;
     }
-    public List<Review> getReviewId(String id) {
+    public Review getReviewId(String id) {
         log.info("================= Get Reviews Id Start =================");
         log.info("================= Get Reviews Id End =================");
         return null;
@@ -51,11 +51,6 @@ public class ReviewController {
     public Map<String,String> deleteById(String id) {
         log.info("================= Delete By Id Start =================");
         log.info("================= Delete By Id End =================");
-        return null;
-    }
-    public Map<String,String> deleteByUserId(String userId) {
-        log.info("================= Delete By UserId Start =================");
-        log.info("================= Delete By UserId End =================");
         return null;
     }
 
