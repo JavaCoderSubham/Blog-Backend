@@ -1,9 +1,10 @@
 package com.blog.repository;
 
-import com.blog.entity.BlogDetails;
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+import com.blog.entity.BlogDetails;
 
 public interface BlogDetailsRepository extends MongoRepository<BlogDetails, String> {
 
@@ -11,7 +12,7 @@ public interface BlogDetailsRepository extends MongoRepository<BlogDetails, Stri
     List<BlogDetails> findByTitleStartingWith(String title);
     List<BlogDetails> findByTopicStartingWith(String topic);
     List<BlogDetails> findByEmail(String email);
-    List<BlogDetails> findByBlogTextStartingWith(String blogText);
+    List<BlogDetails> findByBlogTextContaining(String blogText);
 
 
 }
