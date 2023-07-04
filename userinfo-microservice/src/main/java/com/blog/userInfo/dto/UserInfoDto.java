@@ -1,20 +1,18 @@
-package com.blog.userInfo.entity;
+package com.blog.userInfo.dto;
 
 import java.util.List;
 
 import javax.persistence.Embedded;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.blog.userInfo.entity.Address;
+import com.blog.userInfo.entity.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,20 +23,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Document
-public class UserInfo {
+public class UserInfoDto {
 
 	@Id
 	private String id;
 	private String name;
 	private String role;
-//	@Indexed(unique = true)
 	private String email;
-	private String password;
-//	@Indexed(unique = true)
+	@JsonIgnore
+	private String pasword;
 	private String phoneNo;
 	private String imagePath;
-	@Embedded
 	private Address address;
 	@Transient
 	private List<Review> review;
