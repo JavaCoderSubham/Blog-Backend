@@ -7,9 +7,7 @@ import java.util.Map;
 
 public interface ReviewService {
 
-    List<Review> getReviewsUserId(String id);
     Review getReviewId(String id);
-    List<Review> getReviewBlogId(String id);
     Review createReview(Review review);
     Review updateReview(String id,Review review);
     Map<String,String> deleteById(String id);
