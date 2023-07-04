@@ -2,6 +2,7 @@ package com.blog.review.service;
 
 import com.blog.review.entity.Review;
 import com.blog.review.exception.ReviewIdNotFoundException;
+import com.blog.review.exception.UserIdIsAlreadyPresentException;
 import com.blog.review.repository.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,8 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository repository;
 
     public ReviewServiceImpl(ReviewRepository repository) {
+        log.info("ReviewServiceImpl(ReviewRepository) -> | ReviewRepository : {}",repository);
         this.repository = repository;
-    }
-
-    @Override
-    public List<Review> getReviewsUserId(String id) {
-        log.info("getReviewsUserId(String) -> | Id : {}",id);
-        List<Review> userIdValue = repository.findByUserId(id);
-        log.info("getReviewsUserId(String) -> | List UserId Review : {}",userIdValue);
-        return userIdValue;
     }
 
     @Override
@@ -38,21 +32,24 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getReviewBlogId(String id) {
-        log.info("getReviewBlogId(String) -> | Id : {}",id);
-        List<Review> blogIdValues = repository.findByBlogId(id);
-        log.info("getReviewBlogId(String) -> | List BlogId Review : {}",blogIdValues);
-        return blogIdValues;
-    }
-
-    @Override
     public Review createReview(Review review) {
         log.info("createReview(Review) -> | Review : {}",review);
+//        Check UserId and BlogID if both are Present Review can't upload multiple time in 1 user
+        if(findByUserIdAndBlogIdCheck(review.getUserId(), review.getBlogId())) {
+            log.error("createReview(Review) -> | Review Already Present for UserId : {}",review.getUserId());
+            throw new UserIdIsAlreadyPresentException(review.getUserId());
+        }
         review.setId(UUID.randomUUID().toString());
         log.info("createReview(Review) -> | Review Set Id : {}",review);
         Review save = repository.save(review);
         log.info("createReview(Review) -> | After Save : {}",save);
         return save;
+    }
+
+    private boolean findByUserIdAndBlogIdCheck(String userId, String blogId) {
+        Review review = repository.findByUserIdAndBlogId(userId,blogId)
+                .orElse(null);
+        return review != null;
     }
 
     @Override
@@ -117,7 +114,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Review findByUserIdAndBlogId(String userId, String BlogId) {
         log.info("findByUserIdAndBlogId(String,String) -> | UserId : {} | BlogId : {}",userId,BlogId);
-        Review userIdAndBlogId = repository.findByUserIdAndBlogId(userId, BlogId);
+        Review userIdAndBlogId = repository.findByUserIdAndBlogId(userId, BlogId)
+                .orElseThrow();
         log.info("findByUserIdAndBlogId(String,String) -> | Review UserId And BlogId : {}",userIdAndBlogId);
         return userIdAndBlogId;
     }
@@ -125,7 +123,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Review findByUserIdAndId(String userId, String id) {
         log.info("findByUserIdAndId(String,String) -> | UserId : {} | Id : {}",userId,id);
-        Review byUserIdAndId = repository.findByUserIdAndId(userId, id);
+        Review byUserIdAndId = repository.findByUserIdAndId(userId, id)
+                .orElseThrow();
         log.info("findByUserIdAndId(String,String) -> | Review : {}",byUserIdAndId);
         return byUserIdAndId;
     }
@@ -133,7 +132,8 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Review findByBlogIdAndId(String blogId, String id) {
         log.info("findByBlogIdAndId(String,String) -> | BlogId : {} | Id : {}",blogId,id);
-        Review byBlogIdAndId = repository.findByBlogIdAndId(blogId, id);
+        Review byBlogIdAndId = repository.findByBlogIdAndId(blogId, id)
+                .orElseThrow();
         log.info("findByBlogIdAndId(String,String) -> | Review : {}",byBlogIdAndId);
         return byBlogIdAndId;
     }

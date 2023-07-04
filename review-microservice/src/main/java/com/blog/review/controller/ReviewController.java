@@ -4,8 +4,7 @@ package com.blog.review.controller;
 import com.blog.review.entity.Review;
 import com.blog.review.service.ReviewService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,80 +21,116 @@ public class ReviewController {
         this.service = service;
     }
 
-    public List<Review> getReviewsUserId(String id) {
-        log.info("================= Get Reviews UserId Start =================");
-        log.info("getReviewsUserId(String) -> | Id : {}",id);
-        log.info("================= Get Reviews UserId End =================");
-        return null;
-    }
-    public Review getReviewId(String id) {
+    @GetMapping("/getReviewById/{id}")
+    public Review getReviewId(@PathVariable String id) {
         log.info("================= Get Reviews Id Start =================");
+        log.info("getReviewId(String) -> | Id : {}",id);
+        Review reviewId = service.getReviewId(id);
+        log.info("getReviewId(String) -> | Review : {}",reviewId);
         log.info("================= Get Reviews Id End =================");
-        return null;
+        return reviewId;
     }
-    public List<Review> getReviewBlogId(String id) {
-        log.info("================= Get Reviews BlogId Start =================");
-        log.info("================= Get Reviews BlogId End =================");
-        return null;
-    }
-    public Review createReview(Review review) {
+
+    @PostMapping("/create")
+    public Review createReview( @RequestBody Review review) {
         log.info("================= Create Review Start =================");
+        log.info("createReview(Review) -> | Review : {}",review);
+        Review save = service.createReview(review);
+        log.info("createReview(Review) -> | After Save Review : {}",save);
         log.info("================= Create Review End =================");
-        return null;
+        return save;
     }
-    public Review updateReview(String id,Review review) {
+
+    @PutMapping("/update/{id}")
+    public Review updateReview(@PathVariable String id,@RequestBody Review review) {
         log.info("================= Update Review Start =================");
+        log.info("updateReview(String,Review) -> | Id : {} | Review : {}",id,review);
+        Review save = service.updateReview(id, review);
+        log.info("updateReview(String,Review) -> | ");
         log.info("================= Update Review End =================");
-        return null;
+        return save;
     }
-    public Map<String,String> deleteById(String id) {
+
+    @DeleteMapping("/deleteById/{id}")
+    public Map<String,String> deleteById(@PathVariable String id) {
         log.info("================= Delete By Id Start =================");
+        log.info("deleteById(String) -> | Id : {}",id);
+        Map<String, String> reviewDelete = service.deleteById(id);
+        log.info("deleteById(String) -> | Review Message : {}",reviewDelete);
         log.info("================= Delete By Id End =================");
-        return null;
+        return reviewDelete;
     }
 
 //    ==================== Find Methods ====================
 
-    public List<Review> findByUserId(String userId) {
+    @GetMapping("/findByUserId/{userId}")
+    public List<Review> findByUserId(@PathVariable String userId) {
         log.info("================= Find By User Id Start =================");
+        log.info("findByUserId(String) -> | UserId : {}",userId);
+        List<Review> list = service.findByUserId(userId);
+        log.info("findByUserId(String) -> | List UserId Review : {}",list);
         log.info("================= Find By User Id End =================");
-        return null;
+        return list;
     }
 
-    public List<Review> findByBlogId(String blogId) {
+    @GetMapping("/findByBlogId/{blogId}")
+    public List<Review> findByBlogId(@PathVariable String blogId) {
         log.info("================= Find By Blog Id Start =================");
+        log.info("findByBlogId(String) -> | BlogId : {}",blogId);
+        List<Review> blog = service.findByBlogId(blogId);
+        log.info("findByBlogId(String) -> | List Review Blog : {}",blog);
         log.info("================= Find By Blog Id End =================");
-        return null;
+        return blog;
     }
 
-    public List<Review> findByUserName(String userName) {
+    @GetMapping("/findByUserName/{userName}")
+    public List<Review> findByUserName(@PathVariable String userName) {
         log.info("================= Find By User Name Start =================");
+        log.info("findByUserName(String) -> | UserName : {}",userName);
+        List<Review> userNameBlog = service.findByUserName(userName);
+        log.info("findByUserName(String) -> | List Username Review : {}",userNameBlog);
         log.info("================= Find By User Name End =================");
-        return null;
+        return userNameBlog;
     }
 
-    public List<Review> findByRating(Integer rating) {
+    @GetMapping("/findByRating/{rating}")
+    public List<Review> findByRating(@PathVariable Integer rating) {
         log.info("================= Find By Rating Start =================");
+        log.info("findByRating(Integer) -> | Rating : {}",rating);
+        List<Review> blog = service.findByRating(rating);
+        log.info("findByRating(Integer) -> | List Rating Blog : {}",blog);
         log.info("================= Find By Rating End =================");
-        return null;
+        return blog;
     }
 
-    public Review findByUserIdAndBlogId(String userId, String BlogId) {
+    @GetMapping("/findByUserIdAndBlogId/{userId}/{blogId}")
+    public Review findByUserIdAndBlogId(@PathVariable String userId,@PathVariable String blogId) {
         log.info("================= Find By UserId And BlogId Start =================");
+        log.info("findByUserIdAndBlogId(String,String) -> | UserId : {} | BlogId : {}",userId,blogId);
+        Review reviewUserAndBlog = service.findByUserIdAndBlogId(userId, blogId);
+        log.info("findByUserIdAndBlogId(String,String) -> | Review : {}",reviewUserAndBlog);
         log.info("================= Find By UserId And BlogId End =================");
-        return null;
+        return reviewUserAndBlog;
     }
 
-    public Review findByUserIdAndId(String userId, String id) {
+    @GetMapping("/findByUserIdAndId/{userId}/{id}")
+    public Review findByUserIdAndId(@PathVariable String userId,@PathVariable String id) {
         log.info("================= Find By UserId And Id Start =================");
+        log.info("findByUserIdAndId(String,String) -> | UserId : {} | Id : {}",userId,id);
+        Review review = service.findByUserIdAndId(userId, id);
+        log.info("findByUserIdAndId(String,String) -> | Review : {}",review);
         log.info("================= Find By UserId And Id End =================");
-        return null;
+        return review;
     }
 
-    public Review findByBlogIdAndId(String blogId, String id) {
+    @GetMapping("/findByBlogIdAndId/{blogId}/{id}")
+    public Review findByBlogIdAndId(@PathVariable String blogId,@PathVariable String id) {
         log.info("================= Find By BlogId And Id Start =================");
+        log.info("findByBlogIdAndId(String,String) -> | BlogId : {} | Id : {}",blogId,id);
+        Review review = service.findByBlogIdAndId(blogId, id);
+        log.info("findByBlogIdAndId(String,String) -> | Review : {}",review);
         log.info("================= Find By BlogId And Id End =================");
-        return null;
+        return review;
     }
 
 }
