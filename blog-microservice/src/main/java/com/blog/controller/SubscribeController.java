@@ -50,7 +50,8 @@ public class SubscribeController {
         log.info("findSubscribeByEmail() -> | ");
         Subscribe subscribe = subscribeService.findSubscribeByEmail(email);
         log.info("findSubscribeByEmail() -> | Subscribe : {}", subscribe);
-        return new ResponseEntity<>(subscribe, HttpStatus.OK);
+        return new ResponseEntity<>(subscribe, HttpStatus.OK
+        );
     }
 
     @DeleteMapping("/delete/{id}")

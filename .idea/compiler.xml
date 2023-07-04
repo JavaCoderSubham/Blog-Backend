@@ -6,12 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="admin-microservice" />
-        <module name="my-blog" />
-        <module name="blog-gateway" />
-        <module name="eureka-server" />
-        <module name="super-admin-microservice" />
-        <module name="security-microservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
