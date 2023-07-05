@@ -3,6 +3,7 @@ package com.blog.userInfo.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,8 +31,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	
+  
 	@Override
 	public UserInfo create(UserInfo user) {
 		log.info("============ Create UserDetailsDaoImpl Started ============");
@@ -136,6 +136,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 		log.info("findByname(String)-> | name : {}", name);
 
 		if (userInfos.isEmpty()) {
+
 			throw new RecordNotFound();
 		} else {
 			
@@ -171,6 +172,39 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 		} else {
 			
 			List<UserInfoDto> userInfoDtos = new ArrayList<>();
+
+			for (UserInfo userInfo : userInfos) {
+
+				UserInfoDto userInfoDto = new UserInfoDto();
+				userInfoDto.setId(userInfo.getId());
+				userInfoDto.setName(userInfo.getName());
+				userInfoDto.setEmail(userInfo.getEmail());
+				userInfoDto.setPhoneNo(userInfo.getPhoneNo());
+				userInfoDto.setRole(userInfo.getRole());
+				userInfoDto.setAddress(userInfo.getAddress());
+				userInfoDto.setReview(userInfo.getReview());
+
+				userInfoDtos.add(userInfoDto);
+				log.info("============ findByName UserDetailsDaoImpl Ended ============");
+
+			}
+
+			return userInfoDtos;
+		}
+	}
+
+	@Override
+	public List<UserInfoDto> findByAddressCity(String city) throws RecordNotFound {
+		// UserInfo userInfo = new UserInfo();
+		log.info("============ findByAddressCity UserDetailsDaoImpl Started ============");
+		List<UserInfo> list = userRepository.findByAddressCity(city);
+		log.info("findByAddressCity(String)-> | city : {} ", city);
+		if (list.isEmpty()) {
+			throw new RecordNotFound();
+		} else {
+			
+			List<UserInfoDto> userInfoDtos = new ArrayList<>();
+
 			for (UserInfo userInfo : list) {
 
 				UserInfoDto userInfoDto = new UserInfoDto();
