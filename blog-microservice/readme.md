@@ -18,7 +18,7 @@
     "review": []
   },
 ```
-## Required Fields in Object
+## Required Fields in Object [Not Null]
 - author
 - title
 - topic
@@ -29,10 +29,12 @@
 ---
 
 # URL
+
+---
+
 ## GET Methods
 ### Get All Blogs
     http://localhost:9000/blog/getAll
-
 ### Get Blog By ID
     http://localhost:9000/blog/get/{id}
 ### Find By Topic
@@ -45,12 +47,20 @@
     http://localhost:9000/blog/findBlogText/{blogText}
 ### Find By Author
     http://localhost:9000/blog/findAuthor/{author}
+
+---
+
 ## POST Methods
 ### Create Blog
     http://localhost:9000/blog/create
+
+---
+
 ## PUT Methods
 ### Update Blog With ID
     http://localhost:9000/blog/update/{id}
+---
+
 ## Delete Blog
 ### Delete All Blogs
     http://localhost:9000/blog/deleteAll
