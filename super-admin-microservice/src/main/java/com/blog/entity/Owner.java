@@ -1,32 +1,30 @@
-package com.blog.userInfo.entity;
-
-import java.util.List;
+package com.blog.entity;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+
 @Document
-public class UserDetails {
+public class Owner {
 
 	@Id
 	private String id;
 	private String name;
 	@Indexed(unique = true)
 	private String email;
+	@Indexed(unique = true)
 	private String password;
 	@Indexed(unique = true)
-	private long phoneNo;
-	private String imagePath;
-	private Address address;
-	@Transient
-	List<Review> review;
+	private String mobileNo;
+	private String role;
 }

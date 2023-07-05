@@ -125,9 +125,9 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
     }
 
     @Override
-    public List<BlogDetails> findByBlogTextStartingWith(String blogText) {
+    public List<BlogDetails> findByBlogTextContaining(String blogText) {
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
-        List<BlogDetails> getBlogText = repository.findByBlogTextStartingWith(blogText);
+        List<BlogDetails> getBlogText = repository.findByBlogTextContaining(blogText);
         log.info("findByBlogTextStartingWith(String) -> | List BlogDetails : {}",getBlogText);
         return getBlogText;
     }
