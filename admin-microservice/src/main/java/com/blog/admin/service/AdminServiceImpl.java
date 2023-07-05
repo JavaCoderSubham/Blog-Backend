@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.admin.entity.Admin;
+import com.blog.admin.entity.AdminDto;
 import com.blog.admin.entity.dao.AdminDao;
 
 @Service
@@ -21,43 +22,43 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<Admin> findAllAdmins() {
+	public List<AdminDto> findAllAdmins() {
 		return adminDao.findAllAdmins();
 	}
 
 	@Override
-	public Admin findAdminByEmail(String email) {
-		Admin admin = adminDao.findAdminByEmail(email);
+	public AdminDto findAdminByEmail(String email) {
+		AdminDto admin = adminDao.findAdminByEmail(email);
 		return admin;
 	}
 
 	@Override
-	public Admin findAdminByAadhar(String aadharNumber) {
-		Admin admin = adminDao.findAdminByAadhar(aadharNumber);
+	public AdminDto findAdminByAadhar(String aadharNumber) {
+		AdminDto admin = adminDao.findAdminByAadhar(aadharNumber);
 		return admin;
 	}
 
 	@Override
-	public List<Admin> findAdminByAddressCity(String city) {
-		List<Admin> admins = adminDao.findAdminByAddressCity(city);
+	public List<AdminDto> findAdminByAddressCity(String city) {
+		List<AdminDto> admins = adminDao.findAdminByAddressCity(city);
 		return admins;
 	}
 
 	@Override
-	public List<Admin> findAdminByAddressState(String state) {
-		List<Admin> admins = adminDao.findAdminByAddressCity(state);
+	public List<AdminDto> findAdminByAddressState(String state) {
+		List<AdminDto> admins = adminDao.findAdminByAddressCity(state);
 		return admins;
 	}
 
 	@Override
-	public List<Admin> findAdminByAddressPincode(Integer pincode) {
-		List<Admin> admins = adminDao.findAdminByAddressPincode(pincode);
+	public List<AdminDto> findAdminByAddressPincode(Integer pincode) {
+		List<AdminDto> admins = adminDao.findAdminByAddressPincode(pincode);
 		return admins;
 	}
 
 	@Override
-	public Admin findAdminByMobileNumber(String mobileNumber) {
-		Admin admin = adminDao.findAdminByMobileNumber(mobileNumber);
+	public AdminDto findAdminByMobileNumber(String mobileNumber) {
+		AdminDto admin = adminDao.findAdminByMobileNumber(mobileNumber);
 		return admin;
 	}
 
@@ -67,20 +68,20 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin updateAdminById(String id, Admin admin) {
-		Admin updatedAdmin = adminDao.updateAdminById(id, admin);
+	public AdminDto updateAdminById(String id, AdminDto admin) {
+		AdminDto updatedAdmin = adminDao.updateAdminById(id, admin);
 		return updatedAdmin;
 	}
 
 	@Override
-	public Admin updateAdminByEmail(String email, Admin admin) {
-		Admin updatedAdmin = adminDao.updateAdminByEmail(email, admin);
+	public AdminDto updateAdminByEmail(String email, AdminDto admin) {
+		AdminDto updatedAdmin = adminDao.updateAdminByEmail(email, admin);
 		return updatedAdmin;
 	}
 
 	@Override
-	public Admin updateAdminByMobileNumber(String mobileNumber, Admin admin) {
-		Admin updatedAdmin = adminDao.updateAdminByMobileNumber(mobileNumber, admin);
+	public AdminDto updateAdminByMobileNumber(String mobileNumber, AdminDto admin) {
+		AdminDto updatedAdmin = adminDao.updateAdminByMobileNumber(mobileNumber, admin);
 		return updatedAdmin;
 	}
 

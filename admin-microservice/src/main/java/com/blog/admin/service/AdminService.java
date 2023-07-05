@@ -3,31 +3,32 @@ package com.blog.admin.service;
 import java.util.List;
 
 import com.blog.admin.entity.Admin;
+import com.blog.admin.entity.AdminDto;
 
 public interface AdminService {
 	Admin createAdmin(Admin admin);
 
-	Admin findAdminByEmail(String email);
+	AdminDto findAdminByEmail(String email);
 
-	Admin findAdminByAadhar(String aadharNumber);
+	AdminDto findAdminByAadhar(String aadharNumber);
 
-	Admin findAdminByMobileNumber(String mobileNumber);
+	AdminDto findAdminByMobileNumber(String mobileNumber);
 	
-	List<Admin> findAllAdmins();
+	List<AdminDto> findAllAdmins();
 
-	List<Admin> findAdminByAddressCity(String city);
+	List<AdminDto> findAdminByAddressCity(String city);
 
-	List<Admin> findAdminByAddressState(String state);
+	List<AdminDto> findAdminByAddressState(String state);
 
-	List<Admin> findAdminByAddressPincode(Integer pincode);
+	List<AdminDto> findAdminByAddressPincode(Integer pincode);
 
 	void changePassword(String email, String newPassword);
 
-	Admin updateAdminById(String id, Admin admin);
+	AdminDto updateAdminById(String id, AdminDto admin);
 
-	Admin updateAdminByEmail(String email, Admin admin);
+	AdminDto updateAdminByEmail(String email, AdminDto updatedAdminDto);
 
-	Admin updateAdminByMobileNumber(String mobileNumber, Admin admin);
+	AdminDto updateAdminByMobileNumber(String mobileNumber, AdminDto updatedAdminDto);
 
 	void deleteAdminByEmail(String email);
 

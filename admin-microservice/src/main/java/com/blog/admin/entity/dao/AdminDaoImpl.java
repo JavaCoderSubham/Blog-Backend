@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.blog.admin.entity.Admin;
+import com.blog.admin.entity.AdminDto;
 import com.blog.admin.exceptions.AadharAlreadyExistException;
 import com.blog.admin.exceptions.AdminNotFoundException;
 import com.blog.admin.exceptions.EmailOrMobileAlreadyExistException;
-import com.blog.admin.exceptions.NoAdminsFoundException;
 import com.blog.admin.repository.AdminRepository;
 
 @Service
@@ -20,6 +21,9 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Autowired
 	private AdminRepository adminRepository;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Autowired
 	private PasswordEncoder encoder;
@@ -40,53 +44,57 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	@Override
-	public List<Admin> findAllAdmins() {
+	public List<AdminDto> findAllAdmins() {
 		List<Admin> list = adminRepository.findAll();
-		return list;
+		return list.stream().map(dto -> modelMapper.map(list, AdminDto.class)).collect(Collectors.toList());
 	}
 
 	@Override
-	public Admin findAdminByEmail(String email) {
+	public AdminDto findAdminByEmail(String email) {
 		Admin optionalAdmin = adminRepository.findAdminByEmail(email).orElseThrow(() -> new AdminNotFoundException());
-		return optionalAdmin;
+		AdminDto adminDto = modelMapper.map(optionalAdmin, AdminDto.class);
+		return adminDto;
 	}
 	
 	@Override
-	public Admin findAdminById(String id) {
+	public AdminDto findAdminById(String id) {
 		Admin optionalAdmin = adminRepository.findById(id).orElseThrow(() -> new AdminNotFoundException());
-		return optionalAdmin;
+		AdminDto adminDto = modelMapper.map(optionalAdmin, AdminDto.class);
+		return adminDto;
 	}
 
 	@Override
-	public Admin findAdminByAadhar(String aadharNumber) {
+	public AdminDto findAdminByAadhar(String aadharNumber) {
 		Admin optionalAdmin = adminRepository.findAdminByAadharNumber(aadharNumber)
 				.orElseThrow(() -> new AdminNotFoundException());
-		return optionalAdmin;
+		AdminDto adminDto = modelMapper.map(optionalAdmin, AdminDto.class);
+		return adminDto;
 	}
 
 	@Override
-	public Admin findAdminByMobileNumber(String mobileNumber) {
+	public AdminDto findAdminByMobileNumber(String mobileNumber) {
 		Admin optionalAdmin = adminRepository.findAdminByMobileNumber(mobileNumber)
 				.orElseThrow(() -> new AdminNotFoundException());
-		return optionalAdmin;
+		AdminDto adminDto = modelMapper.map(optionalAdmin, AdminDto.class);
+		return adminDto;
 	}
 
 	@Override
-	public List<Admin> findAdminByAddressCity(String city) {
+	public List<AdminDto> findAdminByAddressCity(String city) {
 		List<Admin> admins = adminRepository.findByAddressCity(city);
-		return admins;
+		return admins.stream().map(dto -> modelMapper.map(admins, AdminDto.class)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<Admin> findAdminByAddressState(String state) {
+	public List<AdminDto> findAdminByAddressState(String state) {
 		List<Admin> admins = adminRepository.findByAddressCity(state);
-		return admins;
+		return admins.stream().map(dto -> modelMapper.map(admins, AdminDto.class)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<Admin> findAdminByAddressPincode(Integer pincode) {
+	public List<AdminDto> findAdminByAddressPincode(Integer pincode) {
 		List<Admin> admins = adminRepository.findByAddressPincode(pincode);
-		return admins;
+		return admins.stream().map(dto -> modelMapper.map(admins, AdminDto.class)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -106,42 +114,60 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	@Override
-	public Admin updateAdminById(String id, Admin updatedAdmin) {
-        Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new AdminNotFoundException());
+	public AdminDto updateAdminById(String id, AdminDto updatedAdminDto) {
+		Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Admin not found"));
 
-        // Update only the fields that are allowed to be updated
-        admin.setEmail(updatedAdmin.getEmail());
-        admin.setMobileNumber(updatedAdmin.getMobileNumber());
-        admin.setAddress(updatedAdmin.getAddress());
+        // Update the allowed fields
+        admin.setName(updatedAdminDto.getName());
+        admin.setEmail(updatedAdminDto.getEmail());
+        admin.setMobileNumber(updatedAdminDto.getMobileNumber());
+        admin.setAddress(updatedAdminDto.getAddress());
 
-        return adminRepository.save(admin);
-    }
+        admin = adminRepository.save(admin);
 
-	@Override
-	public Admin updateAdminByEmail(String email, Admin updatedAdmin) {
-		Admin admin = adminRepository.findAdminByEmail(email)
-                .orElseThrow(() -> new AdminNotFoundException());
+        // Convert Admin entity to AdminDto
+        AdminDto adminDto = modelMapper.map(admin, AdminDto.class);
 
-        // Update only the fields that are allowed to be updated
-        admin.setEmail(updatedAdmin.getEmail());
-        admin.setMobileNumber(updatedAdmin.getMobileNumber());
-        admin.setAddress(updatedAdmin.getAddress());
-
-        return adminRepository.save(admin);
+        return adminDto;
 	}
 
 	@Override
-	public Admin updateAdminByMobileNumber(String mobileNumber, Admin updatedAdmin) {
+	public AdminDto updateAdminByEmail(String email, AdminDto updatedAdminDto) {
+		Admin admin = adminRepository.findAdminByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Admin not found"));
+
+        // Update the allowed fields
+        admin.setName(updatedAdminDto.getName());
+        admin.setEmail(updatedAdminDto.getEmail());
+        admin.setMobileNumber(updatedAdminDto.getMobileNumber());
+        admin.setAddress(updatedAdminDto.getAddress());
+
+        admin = adminRepository.save(admin);
+
+        // Convert Admin entity to AdminDto
+        AdminDto adminDto = modelMapper.map(admin, AdminDto.class);
+
+        return adminDto;
+	}
+
+	@Override
+	public AdminDto updateAdminByMobileNumber(String mobileNumber, AdminDto updatedAdminDto) {
 		Admin admin = adminRepository.findAdminByMobileNumber(mobileNumber)
-                .orElseThrow(() -> new AdminNotFoundException());
+                .orElseThrow(() -> new IllegalArgumentException("Admin not found"));
 
-        // Update only the fields that are allowed to be updated
-        admin.setEmail(updatedAdmin.getEmail());
-        admin.setMobileNumber(updatedAdmin.getMobileNumber());
-        admin.setAddress(updatedAdmin.getAddress());
+        // Update the allowed fields
+        admin.setName(updatedAdminDto.getName());
+        admin.setEmail(updatedAdminDto.getEmail());
+        admin.setMobileNumber(updatedAdminDto.getMobileNumber());
+        admin.setAddress(updatedAdminDto.getAddress());
 
-        return adminRepository.save(admin);
+        admin = adminRepository.save(admin);
+
+        // Convert Admin entity to AdminDto
+        AdminDto adminDto = modelMapper.map(admin, AdminDto.class);
+
+        return adminDto;
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.admin.entity.Admin;
+import com.blog.admin.entity.AdminDto;
 import com.blog.admin.service.AdminService;
 
 @RestController
@@ -34,45 +35,45 @@ public class AdminController {
 	}
 	
 	@GetMapping("/findall")
-	public ResponseEntity<List<Admin>> findAllAdmins() {
-		List<Admin> admins = adminService.findAllAdmins();
-		return new ResponseEntity<List<Admin>>(admins, HttpStatus.OK);
+	public ResponseEntity<List<AdminDto>> findAllAdmins() {
+		List<AdminDto> admins = adminService.findAllAdmins();
+		return new ResponseEntity<List<AdminDto>>(admins, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findbyemail/{email}")
-	public ResponseEntity<Admin> findAdminByEmail(@PathVariable String email) {
-		Admin admin = adminService.findAdminByEmail(email);
-		return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+	public ResponseEntity<AdminDto> findAdminByEmail(@PathVariable String email) {
+		AdminDto admin = adminService.findAdminByEmail(email);
+		return new ResponseEntity<AdminDto>(admin, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findbymobile/{mobile}")
-	public ResponseEntity<Admin> findAdminByMobile(@PathVariable String mobile) {
-		Admin admin = adminService.findAdminByMobileNumber(mobile);
-		return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+	public ResponseEntity<AdminDto> findAdminByMobile(@PathVariable String mobile) {
+		AdminDto admin = adminService.findAdminByMobileNumber(mobile);
+		return new ResponseEntity<AdminDto>(admin, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findbyaadhar/{aadhar}")
-	public ResponseEntity<Admin> findAdminByAadhar(@PathVariable String aadhar) {
-		Admin admin = adminService.findAdminByAadhar(aadhar);
-		return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+	public ResponseEntity<AdminDto> findAdminByAadhar(@PathVariable String aadhar) {
+		AdminDto admin = adminService.findAdminByAadhar(aadhar);
+		return new ResponseEntity<AdminDto>(admin, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findbycity/{city}")
-	public ResponseEntity<List<Admin>> findAdminByCity(@PathVariable String city) {
-		List<Admin> admins = adminService.findAdminByAddressCity(city);
-		return new ResponseEntity<List<Admin>>(admins, HttpStatus.OK);
+	public ResponseEntity<List<AdminDto>> findAdminByCity(@PathVariable String city) {
+		List<AdminDto> admins = adminService.findAdminByAddressCity(city);
+		return new ResponseEntity<List<AdminDto>>(admins, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findbypincode/{pincode}")
-	public ResponseEntity<List<Admin>> findAdminByPincode(@PathVariable Integer pincode) {
-		List<Admin> admins = adminService.findAdminByAddressPincode(pincode);
-		return new ResponseEntity<List<Admin>>(admins, HttpStatus.OK);
+	public ResponseEntity<List<AdminDto>> findAdminByPincode(@PathVariable Integer pincode) {
+		List<AdminDto> admins = adminService.findAdminByAddressPincode(pincode);
+		return new ResponseEntity<List<AdminDto>>(admins, HttpStatus.OK);
 	}
 	
 	@GetMapping("/findbystate/{state}")
-	public ResponseEntity<List<Admin>> findAdminByState(@PathVariable String state) {
-		List<Admin> admins = adminService.findAdminByAddressCity(state);
-		return new ResponseEntity<List<Admin>>(admins, HttpStatus.OK);
+	public ResponseEntity<List<AdminDto>> findAdminByState(@PathVariable String state) {
+		List<AdminDto> admins = adminService.findAdminByAddressCity(state);
+		return new ResponseEntity<List<AdminDto>>(admins, HttpStatus.OK);
 	}
 	
 	@PutMapping("/changepassword/{id}")
@@ -84,21 +85,21 @@ public class AdminController {
 	}
 	
 	@PutMapping("/updatebyid/{id}")
-	public ResponseEntity<Admin> updateAdminById(@PathVariable String id, @RequestBody Admin admin) {
-		Admin updatedAdmin = adminService.updateAdminById(id, admin);
-		return new ResponseEntity<Admin>(updatedAdmin, HttpStatus.CREATED);
+	public ResponseEntity<AdminDto> updateAdminById(@PathVariable String id, @RequestBody AdminDto admin) {
+		AdminDto updatedAdmin = adminService.updateAdminById(id, admin);
+		return new ResponseEntity<AdminDto>(updatedAdmin, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/updatebyemail/{email}")
-	public ResponseEntity<Admin> updateAdminByEmail(@PathVariable String email, @RequestBody Admin admin) {
-		Admin updatedAdmin = adminService.updateAdminByEmail(email, admin);
-		return new ResponseEntity<Admin>(updatedAdmin, HttpStatus.CREATED);
+	public ResponseEntity<AdminDto> updateAdminByEmail(@PathVariable String email, @RequestBody AdminDto admin) {
+		AdminDto updatedAdmin = adminService.updateAdminByEmail(email, admin);
+		return new ResponseEntity<AdminDto>(updatedAdmin, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/updatebymobile/{mobileNumber}")
-	public ResponseEntity<Admin> updateAdminByMobileNumber(@PathVariable String mobileNumber, @RequestBody Admin admin) {
-		Admin updatedAdmin = adminService.updateAdminByMobileNumber(mobileNumber, admin);
-		return new ResponseEntity<Admin>(updatedAdmin, HttpStatus.CREATED);
+	public ResponseEntity<AdminDto> updateAdminByMobileNumber(@PathVariable String mobileNumber, @RequestBody AdminDto admin) {
+		AdminDto updatedAdmin = adminService.updateAdminByMobileNumber(mobileNumber, admin);
+		return new ResponseEntity<AdminDto>(updatedAdmin, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("deletebyid/{id}")
