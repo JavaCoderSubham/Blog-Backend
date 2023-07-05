@@ -133,4 +133,15 @@ public class ReviewController {
         return review;
     }
 
+    @DeleteMapping("/deleteByBlogId/{blogId}")
+    public Map<String,String> deleteByBlogId(@PathVariable String blogId) {
+        log.info("================= Delete By BlogId Start =================");
+        log.info("deleteByBlogId(String) -> | BlogId : {}",blogId);
+        Map<String, String> delete = service.deleteByBlogId(blogId);
+        log.info("deleteByBlogId(String) -> | Delete Message : {}",delete);
+        log.info("================= Delete By BlogId End =================");
+        return delete;
+    }
+
+
 }

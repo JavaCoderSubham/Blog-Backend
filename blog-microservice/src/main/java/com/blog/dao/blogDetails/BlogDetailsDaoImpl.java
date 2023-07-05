@@ -1,8 +1,10 @@
 package com.blog.dao.blogDetails;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.blog.entity.Review;
 import org.springframework.stereotype.Component;
 
 import com.blog.entity.BlogDetails;
@@ -10,6 +12,7 @@ import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Slf4j
@@ -18,8 +21,11 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
 
     private final BlogDetailsRepository repository;
 
-    public BlogDetailsDaoImpl(BlogDetailsRepository repository) {
+    private final WebClient webClient;
+
+    public BlogDetailsDaoImpl(BlogDetailsRepository repository, WebClient webClient) {
         this.repository = repository;
+        this.webClient = webClient;
     }
 
     @Override
@@ -28,8 +34,19 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         List<BlogDetails> all = repository.findAll();
         log.info("getAllBlog() -> | List BlogDetails : {}",all);
 
-//        TODO Review Add
+        log.info("getAllBlog() -> | Set All Reviews ");
+        for(BlogDetails blog : all) {
 
+            Review[] review = webClient.get()
+                    .uri("http://localhost:8030/review/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+
+            blog.setReview(Arrays.asList(review));
+        }
+
+        log.info("getAllBlog() -> | After Reviews Set : {}",all);
         return all;
     }
 

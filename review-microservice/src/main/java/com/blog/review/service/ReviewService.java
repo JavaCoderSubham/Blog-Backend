@@ -22,6 +22,7 @@ public interface ReviewService {
     Review findByUserIdAndId(String userId, String id);
     Review findByBlogIdAndId(String blogId, String id);
 
-
+    Map<String,String> deleteByBlogId(String id);
+    Map<String,String> deleteByUserId(String id);
 
 }

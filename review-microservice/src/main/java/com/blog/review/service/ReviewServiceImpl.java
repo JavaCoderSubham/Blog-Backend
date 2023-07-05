@@ -138,4 +138,22 @@ public class ReviewServiceImpl implements ReviewService {
         return byBlogIdAndId;
     }
 
+//    ============= Custom Delete Method =============
+
+    @Override
+    public Map<String,String> deleteByBlogId(String id) {
+        log.info("deleteByBlogId(String) -> | Id : {}",id);
+        repository.deleteByBlogId(id);
+        log.info("deleteByBlogId(String) -> | Delete Id : {}",id);
+        Map<String,String> map = new HashMap<>();
+        map.put("success","BlogId : "+id+" All Reviews are delete");
+        return map;
+    }
+
+    @Override
+    public Map<String,String> deleteByUserId(String id) {
+        log.info("deleteByUserId(String) -> | Id : {}",id);
+        return null;
+    }
+
 }
