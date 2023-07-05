@@ -1,25 +1,19 @@
 package com.blog.admin.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Document
-public class Admin {
+public class AdminDto {
 	private String id;
 	private String name;
 	private String email;
 	private String mobileNumber;
-	private String password;
 	private Address address;
 	private String aadharNumber;
 	private String role;
