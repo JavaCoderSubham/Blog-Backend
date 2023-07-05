@@ -11,16 +11,22 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
-	@ExceptionHandler(EmailAlreadyExistException.class)
-	public ResponseEntity<?> emailAlreadyExistException(EmailAlreadyExistException exception, WebRequest request) {
+	@ExceptionHandler(EmailOrMobileAlreadyExistException.class)
+	public ResponseEntity<?> emailOrPhoneAlreadyExistException(EmailOrMobileAlreadyExistException exception, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.FOUND);
 	}
 	
 	@ExceptionHandler(AdminNotFoundException.class)
-	public ResponseEntity<?> AdminFoundException(EmailAlreadyExistException exception, WebRequest request) {
+	public ResponseEntity<?> adminNotFoundException(AdminNotFoundException exception, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(AadharAlreadyExistException.class)
+	public ResponseEntity<?> aadharAlreadyExistException(AadharAlreadyExistException exception, WebRequest request) {
+		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
+		return new ResponseEntity<>(errorDetails, HttpStatus.FOUND);
 	}
 	
 	@ExceptionHandler(Exception.class)

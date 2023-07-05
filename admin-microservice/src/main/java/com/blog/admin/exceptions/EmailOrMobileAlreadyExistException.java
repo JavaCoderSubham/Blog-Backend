@@ -1,12 +1,12 @@
 package com.blog.admin.exceptions;
 
-public class EmailAlreadyExistException extends RuntimeException {
+public class EmailOrMobileAlreadyExistException extends RuntimeException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public EmailAlreadyExistException() {
-		super("Email id already exist");
+	public EmailOrMobileAlreadyExistException() {
+		super("Email id or mobile number already exist");
 	}
 }

@@ -18,6 +18,7 @@ public class Admin {
 	private String id;
 	private String name;
 	private String email;
+	private String mobileNumber;
 	private String password;
 	private Address address;
 	private String aadharNumber;
