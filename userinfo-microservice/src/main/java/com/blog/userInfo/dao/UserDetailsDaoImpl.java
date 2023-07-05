@@ -2,9 +2,7 @@ package com.blog.userInfo.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +31,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	
 	@Override
 	public UserInfo create(UserInfo user) {
 		log.info("============ Create UserDetailsDaoImpl Started ============");
