@@ -1,6 +1,7 @@
 package com.blog.review.service;
 
 import com.blog.review.entity.Review;
+import com.blog.review.exception.BlogIdNotFoundException;
 import com.blog.review.exception.ReviewIdNotFoundException;
 import com.blog.review.exception.UserIdIsAlreadyPresentException;
 import com.blog.review.repository.ReviewRepository;
@@ -143,6 +144,9 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Map<String,String> deleteByBlogId(String id) {
         log.info("deleteByBlogId(String) -> | Id : {}",id);
+        List<Review> checkBlogId = repository.findByBlogId(id);
+        if(checkBlogId == null) throw new BlogIdNotFoundException(id);
+        log.info("deleteByBlogId(String) -> | Blog ID Present... | Check Blog Id : {}",checkBlogId);
         repository.deleteByBlogId(id);
         log.info("deleteByBlogId(String) -> | Delete Id : {}",id);
         Map<String,String> map = new HashMap<>();
@@ -153,7 +157,14 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Map<String,String> deleteByUserId(String id) {
         log.info("deleteByUserId(String) -> | Id : {}",id);
-        return null;
+        List<Review> user = repository.findByUserId(id);
+        if(user == null) throw new UserIdIsAlreadyPresentException(id);
+        log.info("deleteByUserId(String) -> | User ID Present... | User ID : {}",user);
+        repository.deleteByUserId(id);
+        log.info("deleteByUserId(String) -> | User All Reviews are Deleted... | UserId : {}",id);
+        Map<String,String> map = new HashMap<>();
+        map.put("success","BlogId : "+id+" All Reviews are delete");
+        return map;
     }
 
 }
