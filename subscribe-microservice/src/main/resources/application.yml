@@ -21,6 +21,19 @@ spring:
           auth: true
           starttls:
               enable: true
+              
+#logging:
+#  level:
+#    root: info
+#  pattern:
+#    file:  "%d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36} %-5level - %msg%n" 
+#  file:
+#    name: ./SUBSCRBE.log
+#    max-size: 15KB
+#    max-history: 5
+#    
+#    clean-history-on-start: true
+  
 
       
 

@@ -105,7 +105,7 @@ public class SubscribeDaoImpl implements SubscribeDao {
     //Find Subscribe By Email
     @Override
     public Subscribe findSubscribeByEmail(String email) {
-        log.info("findSubscribeByEmail() -> | ", email);
+        log.info("findSubscribeByEmail() -> | {}", email);
         Subscribe optionalSubscribe = repository.findSubscribeByEmail(email).orElseThrow(() -> new SubscriberNotFoundException());
         log.info("findSubscribeByEmail() -> | Subscribe : {}", optionalSubscribe);
         return optionalSubscribe;
