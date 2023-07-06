@@ -21,6 +21,8 @@ public class ReviewController {
         this.service = service;
     }
 
+//    =============== CRUD Operation ===============
+
     @GetMapping("/getReviewById/{id}")
     public Review getReviewId(@PathVariable String id) {
         log.info("================= Get Reviews Id Start =================");
@@ -132,5 +134,28 @@ public class ReviewController {
         log.info("================= Find By BlogId And Id End =================");
         return review;
     }
+
+//    ============= Custom Delete Method =============
+
+    @DeleteMapping("/deleteByBlogId/{blogId}")
+    public Map<String,String> deleteByBlogId(@PathVariable String blogId) {
+        log.info("================= Delete By BlogId Start =================");
+        log.info("deleteByBlogId(String) -> | BlogId : {}",blogId);
+        Map<String, String> delete = service.deleteByBlogId(blogId);
+        log.info("deleteByBlogId(String) -> | Delete Message : {}",delete);
+        log.info("================= Delete By BlogId End =================");
+        return delete;
+    }
+
+    @DeleteMapping("/deleteByUserId/{userId}")
+    public Map<String,String> deleteByUserId(String userId) {
+        log.info("================= Delete By BlogId Start =================");
+        log.info("deleteByBlogId(String) -> | BlogId : {}",userId);
+        Map<String, String> map = service.deleteByUserId(userId);
+        log.info("deleteByBlogId(String) -> | Delete Message : {}",userId);
+        log.info("================= Delete By BlogId End =================");
+        return map;
+    }
+
 
 }

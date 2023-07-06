@@ -11,8 +11,8 @@ public class Review {
 
     private String id;
     private String userId;
-    private String userName;
     private String blogId;
+    private String userName;
     private Integer rating;
     private String comment;
 

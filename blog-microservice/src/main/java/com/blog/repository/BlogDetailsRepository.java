@@ -8,6 +8,7 @@ import com.blog.entity.BlogDetails;
 
 public interface BlogDetailsRepository extends MongoRepository<BlogDetails, String> {
 
+//    ================= Find Methods =================
     List<BlogDetails> findByAuthor(String author);
     List<BlogDetails> findByTitleStartingWith(String title);
     List<BlogDetails> findByTopicStartingWith(String topic);

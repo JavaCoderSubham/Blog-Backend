@@ -1,8 +1,11 @@
 package com.blog.dao.blogDetails;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import com.blog.entity.Review;
 import org.springframework.stereotype.Component;
 
 import com.blog.entity.BlogDetails;
@@ -10,6 +13,7 @@ import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Slf4j
@@ -17,19 +21,23 @@ import lombok.extern.slf4j.Slf4j;
 public class BlogDetailsDaoImpl implements BlogDetailsDao {
 
     private final BlogDetailsRepository repository;
+    private final String baseUrlReview = "http://localhost:8030/review";
 
-    public BlogDetailsDaoImpl(BlogDetailsRepository repository) {
+    private final WebClient webClient;
+
+//    ================= Constructor =================
+    public BlogDetailsDaoImpl(BlogDetailsRepository repository, WebClient webClient) {
         this.repository = repository;
+        this.webClient = webClient;
     }
+
+//    ================= GET Methods =================
 
     @Override
     public List<BlogDetails> getAllBlog() {
         log.info("getAllBlog() -> | ");
         List<BlogDetails> all = repository.findAll();
         log.info("getAllBlog() -> | List BlogDetails : {}",all);
-
-//        TODO Review Add
-
         return all;
     }
 
@@ -41,6 +49,8 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         return blogDetails;
     }
 
+//    ================= POST Create =================
+
     @Override
     public BlogDetails create(BlogDetails blogDetails) {
 
@@ -51,6 +61,8 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         log.info("create(BlogDetails) -> | After Save BlogDetails : {}",blogDetails);
         return save;
     }
+
+//    ================= PUT Create =================
 
     @Override
     public BlogDetails update(String id, BlogDetails blogDetails) {
@@ -68,29 +80,41 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         return save;
     }
 
+//    ================= DELETE Methods =================
+
     @Override
     public void delete(String id) {
         log.info("delete(String) -> | Id : {}",id);
         getBlog(id);
         log.info("delete(String) -> | Present Id : {}",id);
+        Map<String,String> block = webClient.delete()
+                .uri(baseUrlReview + "/deleteByBlogId" + id)
+                .retrieve()
+                .bodyToMono(Map.class)
+                .block();
+        log.info("delete(String) -> | Delete Message : {}",block);
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
-
-//        TODO Delete all review which is attack with this blog
-
     }
 
     @Override
     public void deleteAll() {
-        log.info("deleteAll() -> | ");
+        List<BlogDetails> allBlog = getAllBlog();
+        for(BlogDetails blog : allBlog) {
+            webClient.delete()
+                    .uri(baseUrlReview + "/deleteByBlogId" + blog.getId())
+                    .retrieve()
+                    .bodyToMono(Map.class)
+                    .block();
+            log.info("deleteAll() -> | Delete BlogID : {}",blog.getId());
+        }
+        log.info("deleteAll() -> | Delete All Reviews to Related Blogs");
+        log.info("deleteAll() -> | Delete Blogs");
         repository.deleteAll();
         log.info("deleteAll() -> | All Deleted");
-
-//        TODO review deleteAll
-
     }
 
-//    Find Methods
+//    ================= Find Methods =================
 
     @Override
     public List<BlogDetails> findByAuthor(String author) {

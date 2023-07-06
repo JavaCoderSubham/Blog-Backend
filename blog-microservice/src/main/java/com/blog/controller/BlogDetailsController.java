@@ -18,7 +18,7 @@ public class BlogDetailsController {
         this.service = service;
     }
 
-//    Get
+//    ================= Get Methods =================
     @GetMapping("/getAll")
     public List<BlogDetails> getAll() {
         log.info("============ Get All Method Start ============");
@@ -39,7 +39,7 @@ public class BlogDetailsController {
         return blog;
     }
 
-//    Create
+//    ================= Create Methods =================
     @PostMapping("/create")
     public BlogDetails create(@RequestBody BlogDetails blogDetails) {
         log.info("============ Create Method Start ============");
@@ -50,7 +50,7 @@ public class BlogDetailsController {
         return save;
     }
 
-//    Update
+//    ================= Update Methods =================
     @PutMapping("/update/{id}")
     public BlogDetails update(@PathVariable String id,@RequestBody BlogDetails blogDetails) {
         log.info("============ Update Method Start ============");
@@ -61,7 +61,7 @@ public class BlogDetailsController {
         return save;
     }
 
-//    Delete
+//    ================= Delete Methods =================
     @DeleteMapping("/delete/{id}")
     public void blogDeleteById(@RequestParam String id) {
         log.info("============ Blog Delete By Id Method Start ============");
@@ -80,7 +80,7 @@ public class BlogDetailsController {
         log.info("============ Delete All Method End ============");
     }
 
-//    Find
+//    ================= Find Methods =================
 
     @GetMapping("/findAuthor/{author}")
     public List<BlogDetails> findByAuthor(@PathVariable String author) {

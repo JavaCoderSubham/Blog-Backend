@@ -1,6 +1,7 @@
 package com.blog.review.service;
 
 import com.blog.review.entity.Review;
+import com.blog.review.exception.BlogIdNotFoundException;
 import com.blog.review.exception.ReviewIdNotFoundException;
 import com.blog.review.exception.UserIdIsAlreadyPresentException;
 import com.blog.review.repository.ReviewRepository;
@@ -31,6 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
         return review;
     }
 
+//    ================= Create Method =================
     @Override
     public Review createReview(Review review) {
         log.info("createReview(Review) -> | Review : {}",review);
@@ -44,12 +46,6 @@ public class ReviewServiceImpl implements ReviewService {
         Review save = repository.save(review);
         log.info("createReview(Review) -> | After Save : {}",save);
         return save;
-    }
-
-    private boolean findByUserIdAndBlogIdCheck(String userId, String blogId) {
-        Review review = repository.findByUserIdAndBlogId(userId,blogId)
-                .orElse(null);
-        return review != null;
     }
 
     @Override
@@ -85,6 +81,14 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> byUserId = repository.findByUserId(userId);
         log.info("findByUserId(String) -> | List UserID Review : {}",byUserId);
         return byUserId;
+    }
+
+    private boolean findByUserIdAndBlogIdCheck(String userId, String blogId) {
+        log.info("findByUserIdAndBlogIdCheck(String,String) -> | UserID : {} | BlogId : {}",userId,blogId);
+        Review review = repository.findByUserIdAndBlogId(userId,blogId)
+                .orElse(null);
+        log.info("findByUserIdAndBlogIdCheck(String,String) -> | Review : {}",review);
+        return review != null;
     }
 
     @Override
@@ -136,6 +140,34 @@ public class ReviewServiceImpl implements ReviewService {
                 .orElseThrow();
         log.info("findByBlogIdAndId(String,String) -> | Review : {}",byBlogIdAndId);
         return byBlogIdAndId;
+    }
+
+//    ============= Custom Delete Method =============
+
+    @Override
+    public Map<String,String> deleteByBlogId(String id) {
+        log.info("deleteByBlogId(String) -> | Id : {}",id);
+        List<Review> checkBlogId = repository.findByBlogId(id);
+        if(checkBlogId == null) throw new BlogIdNotFoundException(id);
+        log.info("deleteByBlogId(String) -> | Blog ID Present... | Check Blog Id : {}",checkBlogId);
+        repository.deleteByBlogId(id);
+        log.info("deleteByBlogId(String) -> | Delete Id : {}",id);
+        Map<String,String> map = new HashMap<>();
+        map.put("success","BlogId : "+id+" All Reviews are delete");
+        return map;
+    }
+
+    @Override
+    public Map<String,String> deleteByUserId(String id) {
+        log.info("deleteByUserId(String) -> | Id : {}",id);
+        List<Review> user = repository.findByUserId(id);
+        if(user == null) throw new UserIdIsAlreadyPresentException(id);
+        log.info("deleteByUserId(String) -> | User ID Present... | User ID : {}",user);
+        repository.deleteByUserId(id);
+        log.info("deleteByUserId(String) -> | User All Reviews are Deleted... | UserId : {}",id);
+        Map<String,String> map = new HashMap<>();
+        map.put("success","BlogId : "+id+" All Reviews are delete");
+        return map;
     }
 
 }
