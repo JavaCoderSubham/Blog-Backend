@@ -1,14 +1,17 @@
 package com.blog.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.blog.entity.Review;
 import org.springframework.stereotype.Service;
 
 import com.blog.dao.blogDetails.BlogDetailsDao;
 import com.blog.entity.BlogDetails;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Slf4j
@@ -17,17 +20,35 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
 
     private final BlogDetailsDao dao;
 
+    private final String baseUrlReview = "http://localhost:8030/review";
+
+    private final WebClient webClient;
+
 //    Constructor
-    public BlogDetailsServiceImpl(BlogDetailsDao dao) {
+    public BlogDetailsServiceImpl(BlogDetailsDao dao, WebClient webClient) {
         this.dao = dao;
+        this.webClient = webClient;
     }
 
-//    Get
+    //    Get
     @Override
     public List<BlogDetails> getAll() {
         log.info("getAll() -> | ");
         List<BlogDetails> all = dao.getAllBlog();
         log.info("getAll() -> | List BlogDetails : {}",all);
+        log.info("getAllBlog() -> | Set All Reviews ");
+        for(BlogDetails blog : all) {
+
+            Review[] review = webClient.get()
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+
+            blog.setReview(Arrays.asList(review));
+        }
+
+        log.info("getAllBlog() -> | After Reviews Set : {}",all);
         return all;
     }
     @Override
@@ -35,6 +56,14 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("getBlog(String) -> | Id : {}",id);
         BlogDetails blog = dao.getBlog(id);
         log.info("getBlog(String) -> | BlogDetails : {}",blog);
+        Review[] review = webClient.get()
+                .uri(baseUrlReview+"/findByBlogId/"+id)
+                .retrieve()
+                .bodyToMono(Review[].class)
+                .block();
+        log.info("etBlog(String) -> | Review : {}",review);
+        blog.setReview(Arrays.asList(review));
+        log.info("etBlog(String) -> | After Review Set : {}",blog);
         return blog;
     }
 
@@ -80,6 +109,15 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("findByAuthor(String) -> | Author : {}",author);
         List<BlogDetails> authorObject = dao.findByAuthor(author);
         log.info("findByAuthor(String) -> | Author List BlogDetails : {}",authorObject);
+        for(BlogDetails blog : authorObject) {
+            Review[] review = webClient.get()
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+            blog.setReview(Arrays.asList(review));
+        }
+        log.info("findByAuthor(String) -> | After Review : {}",authorObject);
         return authorObject;
     }
 
@@ -88,6 +126,15 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("findByTitleStartingWith(String) -> | Title : {}",title);
         List<BlogDetails> titleObjects = dao.findByTitleStartingWith(title);
         log.info("findByTitleStartingWith(String) -> | Title List BlogDetails : {}",titleObjects);
+        for(BlogDetails blog : titleObjects) {
+            Review[] review = webClient.get()
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+            blog.setReview(Arrays.asList(review));
+        }
+        log.info("findByTitleStartingWith(String) -> | After Set Review : {}",titleObjects);
         return titleObjects;
     }
 
@@ -96,6 +143,15 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("findByTopicStartingWith(String) -> | Topic : {}",topic);
         List<BlogDetails> topicObjects = dao.findByTopicStartingWith(topic);
         log.info("findByTopicStartingWith(String) -> | Topic List BlogDetails : {}",topicObjects);
+        for(BlogDetails blog : topicObjects) {
+            Review[] review = webClient.get()
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+            blog.setReview(Arrays.asList(review));
+        }
+        log.info("findByTopicStartingWith(String) -> | After Set Review : {}",topicObjects);
         return topicObjects;
     }
 
@@ -104,6 +160,15 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("findByEmail(String) -> | Email : {}",email);
         List<BlogDetails> emailObjects = dao.findByEmail(email);
         log.info("findByEmail(String) -> | Email List BlogDetails : {}",emailObjects);
+        for(BlogDetails blog : emailObjects) {
+            Review[] review = webClient.get()
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+            blog.setReview(Arrays.asList(review));
+        }
+        log.info("findByEmail(String) -> | After Set Review : {}",emailObjects);
         return emailObjects;
     }
 
@@ -112,6 +177,15 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("findByBlogTextStartingWith(String) -> | BlogText : {}",blogText);
         List<BlogDetails> blogTextObjects = dao.findByBlogTextContaining(blogText);
         log.info("findByBlogTextStartingWith(String) -> |  : {}",blogText);
+        for(BlogDetails blog : blogTextObjects) {
+            Review[] review = webClient.get()
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
+                    .retrieve()
+                    .bodyToMono(Review[].class)
+                    .block();
+            blog.setReview(Arrays.asList(review));
+        }
+        log.info("findByBlogTextStartingWith(String) -> | After Set Review : {}",blogTextObjects);
         return blogTextObjects;
     }
 
