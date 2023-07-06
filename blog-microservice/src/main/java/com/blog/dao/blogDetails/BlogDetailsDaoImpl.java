@@ -2,6 +2,7 @@ package com.blog.dao.blogDetails;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import com.blog.entity.Review;
@@ -21,6 +22,8 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
 
     private final BlogDetailsRepository repository;
 
+    private final String baseUrlReview = "http://localhost:8030/review";
+
     private final WebClient webClient;
 
     public BlogDetailsDaoImpl(BlogDetailsRepository repository, WebClient webClient) {
@@ -38,7 +41,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         for(BlogDetails blog : all) {
 
             Review[] review = webClient.get()
-                    .uri("http://localhost:8030/review/findByBlogId/"+blog.getId())
+                    .uri(baseUrlReview+"/findByBlogId/"+blog.getId())
                     .retrieve()
                     .bodyToMono(Review[].class)
                     .block();
@@ -56,7 +59,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         BlogDetails blogDetails = repository.findById(id).orElseThrow(() -> new BlogDetailsNotFoundException());
         log.info("getBlog(String) -> | BlogDetails : {}",blogDetails);
         Review[] review = webClient.get()
-                .uri("http://localhost:8030/review/findByBlogId/"+id)
+                .uri(baseUrlReview+"/findByBlogId/"+id)
                 .retrieve()
                 .bodyToMono(Review[].class)
                 .block();
@@ -98,21 +101,31 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         log.info("delete(String) -> | Id : {}",id);
         getBlog(id);
         log.info("delete(String) -> | Present Id : {}",id);
+        Map<String,String> block = webClient.delete()
+                .uri(baseUrlReview + "/deleteByBlogId" + id)
+                .retrieve()
+                .bodyToMono(Map.class)
+                .block();
+        log.info("delete(String) -> | Delete Message : {}",block);
         repository.deleteById(id);
         log.info("delete(String) -> | Deleted... ID : {}",id);
-
-//        TODO Delete all review which is attack with this blog
-
     }
 
     @Override
     public void deleteAll() {
-        log.info("deleteAll() -> | ");
+        List<BlogDetails> allBlog = getAllBlog();
+        for(BlogDetails blog : allBlog) {
+            webClient.delete()
+                    .uri(baseUrlReview + "/deleteByBlogId" + blog.getId())
+                    .retrieve()
+                    .bodyToMono(Map.class)
+                    .block();
+            log.info("deleteAll() -> | Delete BlogID : {}",blog.getId());
+        }
+        log.info("deleteAll() -> | Delete All Reviews to Related Blogs");
+        log.info("deleteAll() -> | Delete Blogs");
         repository.deleteAll();
         log.info("deleteAll() -> | All Deleted");
-
-//        TODO review deleteAll
-
     }
 
 //    Find Methods
