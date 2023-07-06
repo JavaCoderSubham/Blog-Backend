@@ -24,13 +24,12 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
 
     private final WebClient webClient;
 
-//    Constructor
+//    ================= Constructor =================
     public BlogDetailsServiceImpl(BlogDetailsDao dao, WebClient webClient) {
         this.dao = dao;
         this.webClient = webClient;
     }
-
-    //    Get
+//    ================= Get Method =================
     @Override
     public List<BlogDetails> getAll() {
         log.info("getAll() -> | ");
@@ -67,7 +66,7 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         return blog;
     }
 
-//    Create
+//    ================= Create Methods =================
     @Override
     public BlogDetails create(BlogDetails blogDetails) {
         log.info("create(BlogDetails) -> | BlogDetails : {}",blogDetails);
@@ -78,7 +77,7 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         return getSave;
     }
 
-//    Update
+//    ================= Update Methods =================
     @Override
     public BlogDetails update(String id, BlogDetails blogDetails) {
         log.info("update(String,BlogDetails) -> | Id : {} | BlogDetails : {}",id,blogDetails);
@@ -88,7 +87,7 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
     }
 
 
-//    Delete
+//    ================= Delete Methods =================
     @Override
     public void blogDeleteById(String id) {
         log.info("blogDeleteById(String) -> | Id : {}",id);
@@ -103,7 +102,7 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         log.info("blogDeleteAll() -> | All delete");
     }
 
-//    Find
+//    ================= Find Methods =================
     @Override
     public List<BlogDetails> findByAuthor(String author) {
         log.info("findByAuthor(String) -> | Author : {}",author);

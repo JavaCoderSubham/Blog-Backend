@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalException {
 
+
+//    ================= BlogDetails Not Found Exception =================
     @ExceptionHandler(BlogDetailsNotFoundException.class)
     public ResponseEntity<ErrorResponse> blogDetailsNotFoundExceptionHandler(BlogDetailsNotFoundException ex, WebRequest webRequest) {
         log.error("blogDetailsNotFoundExceptionHandler(BlogDetailsNotFoundException,WebRequest) -> | Error Message : {}",ex.getMessage());
@@ -23,6 +25,7 @@ public class GlobalException {
                 .body(error);
     }
 
+//    ================= Review Not Found Exception =================
     @ExceptionHandler(ReviewNotFoundException.class)
     public ResponseEntity<ErrorResponse> reviewNotFoundExceptionHandler(ReviewNotFoundException ex, WebRequest webRequest) {
         log.error("reviewNotFoundExceptionHandler(ReviewNotFoundException,WebRequest) -> | Error Message : {}",ex.getMessage());
@@ -32,6 +35,7 @@ public class GlobalException {
                 .body(error);
     }
 
+//    ================= Review Post Not Found Exception =================
     @ExceptionHandler(ReviewPostIdNotFoundException.class)
     public ResponseEntity<ErrorResponse> reviewPostIdNotFoundExceptionHandler(ReviewPostIdNotFoundException ex, WebRequest webRequest) {
         log.error("reviewPostIdNotFoundExceptionHandler(ReviewPostIdNotFoundException,WebRequest) -> | Error Message : {}",ex.getMessage());
@@ -41,6 +45,7 @@ public class GlobalException {
                 .body(error);
     }
 
+//    ================= Null Pointer Exception =================
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ErrorResponse> nullPointerExceptionHandler(NullPointerException ex, WebRequest webRequest) {
         log.error("nullPointerExceptionHandler(NullPointerException,WebRequest) -> | Error Message : {}",ex.getMessage());
@@ -49,6 +54,7 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(error);
     }
+
 
 }
 

@@ -25,12 +25,13 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
 
     private final WebClient webClient;
 
+//    ================= Constructor =================
     public BlogDetailsDaoImpl(BlogDetailsRepository repository, WebClient webClient) {
         this.repository = repository;
         this.webClient = webClient;
     }
 
-//    GET Methods
+//    ================= GET Methods =================
 
     @Override
     public List<BlogDetails> getAllBlog() {
@@ -48,7 +49,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         return blogDetails;
     }
 
-//    POST Create
+//    ================= POST Create =================
 
     @Override
     public BlogDetails create(BlogDetails blogDetails) {
@@ -61,7 +62,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         return save;
     }
 
-//    PUT Create
+//    ================= PUT Create =================
 
     @Override
     public BlogDetails update(String id, BlogDetails blogDetails) {
@@ -79,7 +80,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         return save;
     }
 
-//    DELETE Methods
+//    ================= DELETE Methods =================
 
     @Override
     public void delete(String id) {
@@ -113,7 +114,7 @@ public class BlogDetailsDaoImpl implements BlogDetailsDao {
         log.info("deleteAll() -> | All Deleted");
     }
 
-//    Find Methods
+//    ================= Find Methods =================
 
     @Override
     public List<BlogDetails> findByAuthor(String author) {

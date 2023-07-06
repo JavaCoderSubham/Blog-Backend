@@ -32,6 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
         return review;
     }
 
+//    ================= Create Method =================
     @Override
     public Review createReview(Review review) {
         log.info("createReview(Review) -> | Review : {}",review);
@@ -45,12 +46,6 @@ public class ReviewServiceImpl implements ReviewService {
         Review save = repository.save(review);
         log.info("createReview(Review) -> | After Save : {}",save);
         return save;
-    }
-
-    private boolean findByUserIdAndBlogIdCheck(String userId, String blogId) {
-        Review review = repository.findByUserIdAndBlogId(userId,blogId)
-                .orElse(null);
-        return review != null;
     }
 
     @Override
@@ -86,6 +81,14 @@ public class ReviewServiceImpl implements ReviewService {
         List<Review> byUserId = repository.findByUserId(userId);
         log.info("findByUserId(String) -> | List UserID Review : {}",byUserId);
         return byUserId;
+    }
+
+    private boolean findByUserIdAndBlogIdCheck(String userId, String blogId) {
+        log.info("findByUserIdAndBlogIdCheck(String,String) -> | UserID : {} | BlogId : {}",userId,blogId);
+        Review review = repository.findByUserIdAndBlogId(userId,blogId)
+                .orElse(null);
+        log.info("findByUserIdAndBlogIdCheck(String,String) -> | Review : {}",review);
+        return review != null;
     }
 
     @Override
