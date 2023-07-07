@@ -1,7 +1,6 @@
 package com.blog.subscribe.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +30,6 @@ public class SubscribeServiceImpl implements SubscribeService {
     @Override
     public Subscribe create(Subscribe subscribe) {
         log.info("create(Subscribe) -> | Subscribe : {}",subscribe);
-        subscribe.setId(UUID.randomUUID().toString());
-        log.info("create(Subscribe) -> | Set Id : {}",subscribe);
         Subscribe getSave = subscribeDao.create(subscribe);
         log.info("create(Subscribe) -> | After execute Dao Create : {}",getSave);
         return getSave;
