@@ -18,8 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserServiceImpl implements UserService {
 
+
+	private final UserDetailsDao userDetailsDao;
+	
 	@Autowired
-	private UserDetailsDao userDetailsDao;
+	public UserServiceImpl(UserDetailsDao userDetailsDao) {
+		this.userDetailsDao = userDetailsDao;
+	}
+	
 
 	@Override
 	public UserInfo create(UserInfo user) {

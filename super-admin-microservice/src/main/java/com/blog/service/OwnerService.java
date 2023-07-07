@@ -1,14 +1,23 @@
 package com.blog.service;
 
+import com.blog.dto.OwnerDto;
 import com.blog.entity.Owner;
 
 public interface OwnerService {
 
 	public Owner create(Owner owner);
 	
-	public Owner getById(String id);
+	public OwnerDto getById(String id);
 	
-	public Owner update (String id, Owner owner);
+	public OwnerDto update (String id, Owner owner);
 	
-	public void delete(String id);
+	public String delete(String id);
+	
+	//********************************//
+	
+	public OwnerDto findByEmail(String email);
+	
+	public OwnerDto findByMobileNo(String mobileNo);
+	
+	void changePassword(String email, String password);
 }

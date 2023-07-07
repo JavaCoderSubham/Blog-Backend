@@ -8,8 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="admin-microservice" />
         <module name="my-blog" />
-        <module name="blog-gateway" />
         <module name="eureka-server" />
+        <module name="blog-gateway" />
         <module name="super-admin-microservice" />
         <module name="security-microservice" />
       </profile>

@@ -1,4 +1,4 @@
-package com.blog.review.repository;
+ package com.blog.review.repository;
 
 import com.blog.review.entity.Review;
 import org.springframework.data.mongodb.repository.MongoRepository;

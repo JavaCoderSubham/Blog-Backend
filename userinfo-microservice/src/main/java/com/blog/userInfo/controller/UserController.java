@@ -30,8 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user")
 public class UserController {
 
+
+	private final UserDetailsDao userService;
+	
 	@Autowired
-	private UserDetailsDao userService;
+	public UserController (UserDetailsDao userService) {
+		this.userService = userService;
+	}
 
 	//UserCreate Endpoint
 	@PostMapping("/create")

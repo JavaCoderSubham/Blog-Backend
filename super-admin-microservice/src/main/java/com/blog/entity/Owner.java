@@ -7,13 +7,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+@Setter
+@Getter
+@ToString
 @Document
 public class Owner {
 

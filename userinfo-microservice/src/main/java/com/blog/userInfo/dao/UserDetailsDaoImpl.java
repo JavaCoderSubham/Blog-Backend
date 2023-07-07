@@ -24,8 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserDetailsDaoImpl implements UserDetailsDao {
 
+	
+	private final UserRepository userRepository;
+	
+	
 	@Autowired
-	private UserRepository userRepository;
+	public UserDetailsDaoImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	ObjectMapper mapper = new ObjectMapper();
 
@@ -161,37 +167,37 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 		}
 	}
 
-	@Override
-	public List<UserInfoDto> findByAddressCity(String city) throws RecordNotFound {
-		// UserInfo userInfo = new UserInfo();
-		log.info("============ findByAddressCity UserDetailsDaoImpl Started ============");
-		List<UserInfo> list = userRepository.findByAddressCity(city);
-		log.info("findByAddressCity(String)-> | city : {} ", city);
-		if (list.isEmpty()) {
-			throw new RecordNotFound();
-		} else {
-			
-			List<UserInfoDto> userInfoDtos = new ArrayList<>();
-
-			for (UserInfo userInfo : userInfos) {
-
-				UserInfoDto userInfoDto = new UserInfoDto();
-				userInfoDto.setId(userInfo.getId());
-				userInfoDto.setName(userInfo.getName());
-				userInfoDto.setEmail(userInfo.getEmail());
-				userInfoDto.setPhoneNo(userInfo.getPhoneNo());
-				userInfoDto.setRole(userInfo.getRole());
-				userInfoDto.setAddress(userInfo.getAddress());
-				userInfoDto.setReview(userInfo.getReview());
-
-				userInfoDtos.add(userInfoDto);
-				log.info("============ findByName UserDetailsDaoImpl Ended ============");
-
-			}
-
-			return userInfoDtos;
-		}
-	}
+//	@Override
+//	public List<UserInfoDto> findByAddressCity(String city) throws RecordNotFound {
+//		// UserInfo userInfo = new UserInfo();
+//		log.info("============ findByAddressCity UserDetailsDaoImpl Started ============");
+//		List<UserInfo> list = userRepository.findByAddressCity(city);
+//		log.info("findByAddressCity(String)-> | city : {} ", city);
+//		if (list.isEmpty()) {
+//			throw new RecordNotFound();
+//		} else {
+//			
+//			List<UserInfoDto> userInfoDtos = new ArrayList<>();
+//
+//			for (UserInfo userInfo : userInfos) {
+//
+//				UserInfoDto userInfoDto = new UserInfoDto();
+//				userInfoDto.setId(userInfo.getId());
+//				userInfoDto.setName(userInfo.getName());
+//				userInfoDto.setEmail(userInfo.getEmail());
+//				userInfoDto.setPhoneNo(userInfo.getPhoneNo());
+//				userInfoDto.setRole(userInfo.getRole());
+//				userInfoDto.setAddress(userInfo.getAddress());
+//				userInfoDto.setReview(userInfo.getReview());
+//
+//				userInfoDtos.add(userInfoDto);
+//				log.info("============ findByName UserDetailsDaoImpl Ended ============");
+//
+//			}
+//
+//			return userInfoDtos;
+//		}
+//	}
 
 	@Override
 	public List<UserInfoDto> findByAddressCity(String city) throws RecordNotFound {
@@ -240,7 +246,7 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 				UserInfoDto userInfoDto = new UserInfoDto();
 				userInfoDto.setId(userInfo.getId());
 				userInfoDto.setName(userInfo.getName());
-				userInfoDto.setEmail(userInfo.getEmail());
+				userInfoDto.setEmail (userInfo.getEmail());
 				userInfoDto.setPhoneNo(userInfo.getPhoneNo());
 				userInfoDto.setRole(userInfo.getRole());
 				userInfoDto.setAddress(userInfo.getAddress());
