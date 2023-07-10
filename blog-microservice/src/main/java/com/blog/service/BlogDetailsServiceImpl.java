@@ -3,10 +3,8 @@ package com.blog.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 import com.blog.entity.Review;
 import org.springframework.stereotype.Service;
-
 import com.blog.dao.blogDetails.BlogDetailsDao;
 import com.blog.entity.BlogDetails;
 
@@ -43,7 +41,6 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
                     .retrieve()
                     .bodyToMono(Review[].class)
                     .block();
-
             blog.setReview(Arrays.asList(review));
         }
 
@@ -64,7 +61,7 @@ public class BlogDetailsServiceImpl implements BlogDetailsService {
         blog.setReview(Arrays.asList(review));
         log.info("etBlog(String) -> | After Review Set : {}",blog);
         return blog;
-    }
+    }  
 
 //    ================= Create Methods =================
     @Override
