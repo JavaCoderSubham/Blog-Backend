@@ -12,6 +12,7 @@ spring:
   cloud:
     gateway:
 
+#      CORS POLICY CONFIG
       globalcors:
         add-to-simple-url-handler-mapping: true
 
@@ -45,49 +46,51 @@ spring:
       httpclient:
         wiretap: true
 
+#        SSL CONFIG
         ssl:
           use-insecure-trust-manager: true
 
+#      ROUTES FEATURE
       routes:
 
 #        BLOG MICROSERVICE ROUTE
         - id: BLOG-SERVICE
-          uri:
+          uri: http://localhost:9000
           predicates:
-            - Path=
+            - Path=/blog/**
 
-#        REVIEW MICROSERVICE ROUTE
-        - id: REVIEW-SERVICE
-          uri:
-          predicates:
-            - Path=
-
-#        USER MICROSERVICE ROUTE
-        - id: USER-SERVICE
-          uri:
-          predicates:
-            - Path=
-
-#        ADMIN MICROSERVICE ROUTE
-        - id: ADMIN-SERVICE
-          uri:
-          predicates:
-            - Path=
-
-#        OWNER MICROSERVICE ROUTE
-        - id: OWNER-SERVICE
-          uri:
-          predicates:
-            - Path=
-
-#        OTP MICROSERVICE ROUTE
-        - id: OTP-SERVICE
-          uri:
-          predicates:
-            - Path=
-
-#        SUBSCRIBE MICROSERVICE ROUTE
-        - id: SUBSCRIBE-SERVICE
-          uri:
-          predicates:
-            - Path=
+##        REVIEW MICROSERVICE ROUTE
+#        - id: REVIEW-SERVICE
+#          uri:
+#          predicates:
+#            - Path=
+#
+##        USER MICROSERVICE ROUTE
+#        - id: USER-SERVICE
+#          uri:
+#          predicates:
+#            - Path=
+#
+##        ADMIN MICROSERVICE ROUTE
+#        - id: ADMIN-SERVICE
+#          uri:
+#          predicates:
+#            - Path=
+#
+##        OWNER MICROSERVICE ROUTE
+#        - id: OWNER-SERVICE
+#          uri:
+#          predicates:
+#            - Path=
+#
+##        OTP MICROSERVICE ROUTE
+#        - id: OTP-SERVICE
+#          uri:
+#          predicates:
+#            - Path=
+#
+##        SUBSCRIBE MICROSERVICE ROUTE
+#        - id: SUBSCRIBE-SERVICE
+#          uri:
+#          predicates:
+#            - Path=
