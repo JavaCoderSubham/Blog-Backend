@@ -2,12 +2,15 @@ package com.blog.userInfo.service;
 
 import java.util.List;
 
+import org.springframework.cloud.openfeign.FeignClient;
+
 import com.blog.userInfo.dto.UserInfoDto;
 import com.blog.userInfo.entity.UserInfo;
 import com.blog.userInfo.entity.UserProjectionEmail;
 import com.blog.userInfo.entity.UserProjectionPhoneNo;
 import com.blog.userInfo.exception.RecordNotFound;
 
+@FeignClient(name="review" , url="http://localhost:8030/review/**")
 public interface UserService {
 
 	UserInfo create(UserInfo user);

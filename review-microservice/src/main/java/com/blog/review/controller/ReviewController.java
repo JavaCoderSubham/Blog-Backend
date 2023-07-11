@@ -95,6 +95,7 @@ public class ReviewController {
         return userNameBlog;
     }
 
+     
     @GetMapping("/findByRating/{rating}")
     public List<Review> findByRating(@PathVariable Integer rating) {
         log.info("================= Find By Rating Start =================");
@@ -107,7 +108,7 @@ public class ReviewController {
 
     @GetMapping("/findByUserIdAndBlogId/{userId}/{blogId}")
     public Review findByUserIdAndBlogId(@PathVariable String userId,@PathVariable String blogId) {
-        log.info("================= Find By UserId And BlogId Start =================");
+        log.info  ("================= Find By UserId And BlogId Start =================");
         log.info("findByUserIdAndBlogId(String,String) -> | UserId : {} | BlogId : {}",userId,blogId);
         Review reviewUserAndBlog = service.findByUserIdAndBlogId(userId, blogId);
         log.info("findByUserIdAndBlogId(String,String) -> | Review : {}",reviewUserAndBlog);
