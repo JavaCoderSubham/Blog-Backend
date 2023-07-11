@@ -14,6 +14,7 @@ import com.blog.admin.entity.AdminDto;
 import com.blog.admin.exceptions.AadharAlreadyExistException;
 import com.blog.admin.exceptions.AdminNotFoundException;
 import com.blog.admin.exceptions.EmailOrMobileAlreadyExistException;
+import com.blog.admin.exceptions.NoAdminsFoundException;
 import com.blog.admin.repository.AdminRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +58,10 @@ public class AdminDaoImpl implements AdminDao {
 		log.info("getAllAdmins() -> | ");
 		List<Admin> list = adminRepository.findAll();
 		log.info("getAllAdmins() -> | Admin List : {}", list);
-		List<AdminDto> adminDtos = list.stream().map(dto -> modelMapper.map(list, AdminDto.class))
+		if(list.isEmpty()) {
+			throw new NoAdminsFoundException();
+		}
+		List<AdminDto> adminDtos = list.stream().map(admin -> modelMapper.map(admin, AdminDto.class))
 				.collect(Collectors.toList());
 		log.info("getAllAdmins() -> | AdminDto List : {}", adminDtos);
 		return adminDtos;
@@ -115,7 +119,7 @@ public class AdminDaoImpl implements AdminDao {
 		log.info("findAdminByAddressCity() -> | {}", city);
 		List<Admin> admins = adminRepository.findByAddressCity(city);
 		log.info("findAdminByAddressCity() -> | Admin : {}", admins);
-		List<AdminDto> adminDtos = admins.stream().map(dto -> modelMapper.map(admins, AdminDto.class))
+		List<AdminDto> adminDtos = admins.stream().map(admin -> modelMapper.map(admin, AdminDto.class))
 				.collect(Collectors.toList());
 		log.info("findAdminByAddressCity() -> | AdminDto : {}", adminDtos);
 		return adminDtos;
@@ -125,9 +129,9 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<AdminDto> findAdminByAddressState(String state) {
 		log.info("findAdminByAddressState() -> | {}", state);
-		List<Admin> admins = adminRepository.findByAddressCity(state);
+		List<Admin> admins = adminRepository.findByAddressState(state);
 		log.info("findAdminByAddressState() -> | Admin : {}", admins);
-		List<AdminDto> adminDtos = admins.stream().map(dto -> modelMapper.map(admins, AdminDto.class))
+		List<AdminDto> adminDtos = admins.stream().map(admin -> modelMapper.map(admin, AdminDto.class))
 				.collect(Collectors.toList());
 		log.info("findAdminByAddressState() -> | AdminDto : {}", adminDtos);
 		return adminDtos;
@@ -139,14 +143,14 @@ public class AdminDaoImpl implements AdminDao {
 		log.info("findAdminByAddressPincode() -> | {}", pincode);
 		List<Admin> admins = adminRepository.findByAddressPincode(pincode);
 		log.info("findAdminByAddressPincode() -> | Admin : {}", admins);
-		List<AdminDto> adminDtos = admins.stream().map(dto -> modelMapper.map(admins, AdminDto.class))
+		List<AdminDto> adminDtos = admins.stream().map(admin -> modelMapper.map(admin, AdminDto.class))
 				.collect(Collectors.toList());
 		log.info("findAdminByAddressPincode() -> | AdminDto : {}", adminDtos);
 		return adminDtos;
 	}
 
 	// Change Password
-	@Override
+	@Override  
 	public void changePassword(String email, String newPassword) {
 		log.info("changePassword() -> | {}", email);
 		Admin admin = adminRepository.findAdminByEmail(email).orElseThrow(() -> new AdminNotFoundException());

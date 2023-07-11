@@ -65,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<AdminDto> findAdminByAddressState(String state) {
 		log.info("findAdminByAddressState() -> | State : {}", state);
-		List<AdminDto> admins = adminDao.findAdminByAddressCity(state);
+		List<AdminDto> admins = adminDao.findAdminByAddressState(state);
 		log.info("findAdminByAddressState() -> | Admins By State : {}", admins);
 		return admins;
 	}
