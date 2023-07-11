@@ -8,8 +8,13 @@ spring:
       host: localhost
       port: 27017
       database: users
-
-
-      
+      spring:
+cloud:
+    gateway:
+      routes:
+      - id: review
+        uri: http://localhost:8030/
+        predicates:
+        - Path=/review/**
 
 

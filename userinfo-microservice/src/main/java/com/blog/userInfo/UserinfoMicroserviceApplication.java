@@ -11,4 +11,5 @@ public class UserinfoMicroserviceApplication {
 		SpringApplication.run(UserinfoMicroserviceApplication.class, args);
 	}
 
+	
 }
