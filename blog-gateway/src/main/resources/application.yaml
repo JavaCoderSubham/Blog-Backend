@@ -21,54 +21,54 @@ spring:
     name: GATEWAY-SERVICE
   cloud:
     gateway:
-#
-##      CORS POLICY CONFIG
-#      globalcors:
-#        add-to-simple-url-handler-mapping: true
-#
-#        cors-configurations:
-#          '[/**]':
-#            allowedOrigins: "*"
-#            allowedMethods:
-#              - GET
-#              - POST
-#              - PUT
-#              - DELETE
-#              - PATCH
-#
-#            allowedHeaders:
-#              - "Origin"
-#              - "Content-Type"
-#              - "Accept"
-#              - "Authorization"
-#              - "User-Key"
-#              - "Request-Tracker"
-#              - "Session-Tracker"
-#              - "X-XSRF-TOKEN"
-#              - "X-IBM-CLIENT-ID"
-#              - "Message-ID"
-#              - "X-IBM-CLIENT-SECRET"
-#      default-filters:
-#        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
-#
-#      httpserver:
-#        wiretap: true
-#      httpclient:
-#        wiretap: true
-#
-##        SSL CONFIG
-#        ssl:
-#          use-insecure-trust-manager: true
 
-#      ROUTES FEATURE
-      routes:
+#      CORS POLICY CONFIG
+      globalcors:
+        add-to-simple-url-handler-mapping: true
 
-#        BLOG MICROSERVICE ROUTE
-        - id: BLOG-SERVICE
-          uri: http://localhost:9000
-          predicates:
-            - Path=/blog/**
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
 
+            allowedHeaders:
+              - "Origin"
+              - "Content-Type"
+              - "Accept"
+              - "Authorization"
+              - "User-Key"
+              - "Request-Tracker"
+              - "Session-Tracker"
+              - "X-XSRF-TOKEN"
+              - "X-IBM-CLIENT-ID"
+              - "Message-ID"
+              - "X-IBM-CLIENT-SECRET"
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
+
+      httpserver:
+        wiretap: true
+      httpclient:
+        wiretap: true
+
+#        SSL CONFIG
+        ssl:
+          use-insecure-trust-manager: true
+
+##      ROUTES FEATURE
+#      routes:
+#
+##        BLOG MICROSERVICE ROUTE
+#        - id: BLOG-SERVICE
+#          uri: lb://BLOG-SERVICE
+#          predicates:
+#            - Path=/blog/**
+#
 ##        REVIEW MICROSERVICE ROUTE
 #        - id: REVIEW-SERVICE
 #          uri:
