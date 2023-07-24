@@ -1,12 +1,6 @@
-package com.blog.entity;
+package com.blog.admin.entity;
 
 import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,25 +14,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Document
 public class BlogDetails {
 
-    @Id
-    private String id; 
-    @NotNull
+    private String id;
     private String author;
-    @NotNull
     private String title;
-    @NotNull
     private String topic;
-    @NotNull
     private String email;
-    @NotNull
     private String blogText;
-    @NotNull
     private String imagePath;
     private List<String> hashTags;
-    @Transient
     private List<Review> review;
 
 }
