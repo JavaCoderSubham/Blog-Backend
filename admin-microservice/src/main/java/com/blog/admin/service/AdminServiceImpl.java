@@ -3,13 +3,18 @@ package com.blog.admin.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.blog.admin.entity.Admin;
 import com.blog.admin.entity.AdminDto;
+import com.blog.admin.entity.BlogDetails;
 import com.blog.admin.entity.dao.AdminDao;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Service
@@ -17,6 +22,11 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private AdminDao adminDao;
+	
+	@Autowired
+	private WebClient webClient;
+	
+	private final String baseUrl = "http://localhost:9000/blog";
 	
 	//========================Create Admin Method===========================
 	
@@ -27,6 +37,8 @@ public class AdminServiceImpl implements AdminService {
 		log.info("create(Admin) -> | After execute Dao Create : {}",save);
 		return save;
 	}
+	
+	
 	
 	//========================Find Admin Methods==============================
 	
@@ -45,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
 		log.info("findAdminByEmail() -> | Admin By Email : {}", admin);
 		return admin;
 	}
-
+  
 	@Override
 	public AdminDto findAdminByAadhar(String aadharNumber) {
 		log.info("findAdminByAadhar() -> | Aadhar Number : {}", aadharNumber);

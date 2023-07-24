@@ -4,10 +4,14 @@ import java.util.List;
 
 import com.blog.admin.entity.Admin;
 import com.blog.admin.entity.AdminDto;
+import com.blog.admin.entity.BlogDetails;
+
+import reactor.core.publisher.Mono;
 
 public interface AdminService {
 	Admin createAdmin(Admin admin);
 
+	
 	AdminDto findAdminByEmail(String email);
 
 	AdminDto findAdminByAadhar(String aadharNumber);
