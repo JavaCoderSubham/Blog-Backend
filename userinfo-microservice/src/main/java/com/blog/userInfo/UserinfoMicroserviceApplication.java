@@ -13,7 +13,5 @@ public class UserinfoMicroserviceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserinfoMicroserviceApplication.class, args);
-	}
-
-	
+	}	
 }
