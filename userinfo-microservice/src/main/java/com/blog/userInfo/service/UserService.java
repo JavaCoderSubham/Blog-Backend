@@ -10,7 +10,7 @@ import com.blog.userInfo.entity.UserProjectionEmail;
 import com.blog.userInfo.entity.UserProjectionPhoneNo;
 import com.blog.userInfo.exception.RecordNotFound;
 
-@FeignClient(name="review" , url="http://localhost:8030/review/**")
+
 public interface UserService {
 
 	UserInfo create(UserInfo user);
