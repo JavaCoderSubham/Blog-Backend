@@ -1,19 +1,17 @@
 package com.blog.dao.blogDetails;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.blog.entity.Review;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.blog.entity.BlogDetails;
 import com.blog.exception.BlogDetailsNotFoundException;
 import com.blog.repository.BlogDetailsRepository;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.reactive.function.client.WebClient;
 
 
 @Slf4j
