@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.userInfo.dao.UserDetailsDao;
 import com.blog.userInfo.dto.UserInfoDto;
+import com.blog.userInfo.entity.Review;
 import com.blog.userInfo.entity.UserInfo;
 import com.blog.userInfo.entity.UserProjectionEmail;
 import com.blog.userInfo.entity.UserProjectionPhoneNo;
 import com.blog.userInfo.exception.RecordNotFound;
+import com.blog.userInfo.utility.ReviewUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,6 +34,9 @@ public class UserController {
 
 
 	private final UserDetailsDao userService;
+	
+	@Autowired
+	ReviewUtil reviewUtil;
 	
 	@Autowired
 	public UserController (UserDetailsDao userService) {
@@ -150,4 +155,23 @@ public class UserController {
 		log.info("=======UserController chnagePassword Ended	11q`=======");
 		return ResponseEntity.status(HttpStatus.CREATED).body(map);
 	}
+	
+	
+	//*********** Connecting User with review ****************//
+
+	@PostMapping("/createReview")
+	public ResponseEntity<Review> create(@RequestBody Review review){
+		return reviewUtil.createReview(review);
+	}
+	
+	@PostMapping("/updateReview/{id}")
+	public ResponseEntity<Review> update(@PathVariable String id, @RequestBody Review review ){
+		return reviewUtil.updateReview(id, review);
+	}
+	
+	 @DeleteMapping("/deleteById/{id}")
+	    public ResponseEntity<Map<String, String>> deleteById(@PathVariable String id) {
+	        
+	        return reviewUtil.deleteById(id);
+	    }
 }
