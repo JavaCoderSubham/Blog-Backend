@@ -23,7 +23,7 @@ import lombok.ToString;
 public class Review {
 
 	
-	   @NotNull
+	    @NotNull
 	    private String userId;
 	    @NotNull
 	    private String blogId;

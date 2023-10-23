@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.FOUND);
 	}
-	 
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> globalException(Exception exception, WebRequest request) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
