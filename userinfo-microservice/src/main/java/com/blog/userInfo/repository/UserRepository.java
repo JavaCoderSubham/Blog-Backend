@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.blog.userInfo.dto.UserInfoDto;
 import com.blog.userInfo.entity.UserInfo;
-import com.blog.userInfo.entity.UserProjectionEmail;
 
 
 public interface UserRepository extends MongoRepository<UserInfo, String>{

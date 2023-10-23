@@ -14,5 +14,4 @@ public class BlogDetailsConfiguration {
         log.info("webClient() -> | Object Created...");
         return WebClient.builder().build();
     }
-
 }
